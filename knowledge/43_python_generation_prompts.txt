@@ -1,0 +1,38 @@
+TITLE: PYTHON GENERATION TASK PATTERNS
+
+PURPOSE:
+Document common Python creation tasks for students and for future prompt design.
+
+NOTE:
+This file is a prompt-design reference, not factual knowledge. The RAG index intentionally excludes it so its examples cannot be mistaken for instructions.
+
+TASK: FUNCTION
+Useful building blocks: def, parameters, return, if/else, loops.
+Example request: Create a Python function that adds two numbers.
+
+TASK: GAME
+Useful building blocks: random, input, lists, conditions, loops, functions.
+Example request: Create a simple Python Rock Paper Scissors game.
+
+TASK: CALCULATOR
+Useful building blocks: functions, arithmetic, if/elif, input validation.
+Example request: Create a Python calculator that can add, subtract, multiply, and divide.
+
+TASK: FILE TOOL
+Useful building blocks: open(), pathlib, json, loops, try/except.
+Example request: Create a Python program that saves a dictionary to JSON.
+
+TASK: CLASS
+Useful building blocks: class, __init__, self, attributes, methods.
+Example request: Create a simple Python Student class.
+
+TASK: DEBUGGING
+Useful workflow: read the error, find the faulty line, explain the cause, make the smallest correction, test the corrected code.
+Example request: Fix this Python function and explain the error.
+
+PYTHON OUTPUT RULES:
+Use Python when Python is requested.
+Include required imports.
+Keep names and logic consistent.
+Prefer the standard library for simple beginner programs.
+Make complete runnable examples when the user asks for a program.

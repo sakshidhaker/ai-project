@@ -1,0 +1,66 @@
+TITLE: HTML AND CSS BASICS
+
+PURPOSE:
+To explain how to structure a webpage and style it to look visually appealing.
+
+WHAT IS IT?
+HTML (HyperText Markup Language) provides the structure and content of a web page. CSS (Cascading Style Sheets) provides the design, colors, and layout. They are the standard building blocks of the internet.
+
+WHY IS IT USEFUL?
+Before JavaScript can make a page interactive, the page has to exist! HTML creates the buttons, text boxes, and paragraphs. CSS ensures the page looks good on both a large monitor and a small mobile phone.
+
+CORE CONCEPTS:
+
+HTML structure: Tags like <html>, <head>, and <body>.
+
+elements: Paragraphs <p>, headings <h1>, divisions <div>.
+
+attributes: Extra info on a tag, like id="chat-box" or class="btn".
+
+forms, labels, inputs, buttons: Elements used to collect user data.
+
+CSS selectors: How CSS targets an HTML element (e.g., #my-id, .my-class).
+
+box model: The invisible box around every element (margin, border, padding, content).
+
+flexbox / grid: CSS tools to organize layouts neatly into rows and columns.
+
+responsive basics: Making the design adjust based on screen size (media queries).
+
+SIMPLE EXPLANATION:
+Think of building a house. HTML is the framing, walls, and doors. CSS is the paint, the carpet, and the interior decoration. You use an HTML id to give a specific room a name (e.g., "Master Bedroom"). You use a CSS selector to say, "Paint the Master Bedroom blue."
+
+CODE EXAMPLES:
+
+Basic HTML:
+
+Basic CSS:
+/* Targets elements by class name (using a dot) */
+.primary-btn {
+background-color: blue;
+color: white;
+border-radius: 5px;
+padding: 10px 15px;
+}
+
+/* Targets an element by its ID (using a hash) /
+#chat-container {
+display: flex;       / Use Flexbox for layout /
+flex-direction: column; / Stack items vertically */
+margin: 20px;
+}
+
+COMMON MISTAKES:
+
+Mixing IDs and Classes: An id must be unique on the page (only one #send-btn). A class can be used on many elements (many .primary-btns).
+
+Misunderstanding the Box Model: If elements don't fit on the screen, it's usually because you forgot that padding and border add extra width to the element.
+
+WHEN TO USE:
+Use HTML and CSS to build the user interface of your web application.
+
+WHEN NOT TO USE:
+HTML and CSS cannot perform logic. You cannot use them to calculate math, contact a database, or validate a password. For that, you need JavaScript and Python.
+
+OFFICIAL RESOURCES:
+MDN HTML Docs: https://developer.mozilla.org/en-US/docs/Web/HTML

@@ -1,0 +1,78 @@
+TITLE: PANDAS DATA ANALYSIS
+
+PURPOSE:
+To explain how to use Pandas for loading, cleaning, and analyzing tabular data (like spreadsheets or SQL tables).
+
+WHAT IS IT?
+Pandas is a Python library that acts like Excel on steroids. It provides a data structure called a "DataFrame" that handles rows and columns of data, allowing you to filter, sort, and analyze millions of rows with simple commands.
+
+WHY IS IT USEFUL?
+Before an AI can learn from data, a human must clean the data. Pandas makes it easy to load a CSV file, find missing values, and prepare the dataset for a Machine Learning model.
+
+CORE CONCEPTS:
+
+Series: A single column of data.
+
+DataFrame: A 2D table of data (rows and columns).
+
+read_csv: A function to load data from a CSV file.
+
+head / info / describe: Quick ways to inspect your data.
+
+selecting columns: Grabbing specific data.
+
+filtering: Finding rows that match a condition.
+
+sorting: Ordering rows.
+
+missing values: Handling empty cells (NaN).
+
+groupby: Grouping data by a category to calculate totals or averages.
+
+merge: Combining two DataFrames together (like a SQL JOIN).
+
+EDA flow: Exploratory Data Analysis—the process of getting to know a new dataset.
+
+SIMPLE EXPLANATION:
+A DataFrame is just a spreadsheet inside Python. Columns have names (like "Age" or "Salary"), and rows have index numbers. You can ask Pandas questions like, "Show me the average salary grouped by department, but only for people older than 30."
+
+CODE EXAMPLES:
+
+Loading and Inspecting Data:
+import pandas as pd
+
+Load data
+df = pd.read_csv("users.csv")
+
+Look at the first 5 rows
+print(df.head())
+
+Get summary statistics (mean, min, max for numerical columns)
+print(df.describe())
+
+Filtering and Selecting:
+
+Select one column (returns a Series)
+names = df["Name"]
+
+Filter rows where Age is greater than 18
+adults = df[df["Age"] > 18]
+
+Group by City and get the average Age
+average_age_by_city = df.groupby("City")["Age"].mean()
+print(average_age_by_city)
+
+COMMON MISTAKES:
+
+Forgetting that filtering requires brackets: df[df["Age"] > 18] looks confusing to beginners, but it just means "give me the dataframe where the dataframe's age is > 18".
+
+Ignoring missing values: Machine Learning models crash if you feed them missing data (NaN). Always check with df.info().
+
+WHEN TO USE:
+Use Pandas for tabular data tasks: reading CSVs/Excel files, cleaning messy data, and analyzing statistics.
+
+WHEN NOT TO USE:
+Do not use Pandas for processing images, audio, or single text documents. Pandas is for spreadsheets and tables.
+
+OFFICIAL RESOURCES:
+Pandas Documentation: https://pandas.pydata.org/docs/

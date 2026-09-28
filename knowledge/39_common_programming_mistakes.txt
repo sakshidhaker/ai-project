@@ -1,0 +1,81 @@
+TITLE: COMMON PROGRAMMING MISTAKES AND DEBUGGING HABITS
+
+PURPOSE:
+To highlight frequent pitfalls encountered by beginner and intermediate developers and teach professional debugging habits.
+
+WHAT IS IT?
+A catalog of common development errors spanning environment setup, coding logic, security, architecture, and debugging practices, along with actionable corrections.
+
+WHY IS IT USEFUL?
+Most bugs are not unique; developers fall into the same traps repeatedly. Knowing these patterns beforehand saves hours of frustration and helps you write cleaner, more resilient code.
+
+COMMON MISTAKES AND CORRECTIONS:
+
+Changing Too Many Files at Once:
+
+Mistake: Modifying five files simultaneously before testing whether the first change worked.
+
+Correction: Make one small change, run the app or test, verify the result, and then proceed.
+
+Ignoring the Traceback:
+
+Mistake: Seeing a red error message, closing the terminal in panic, and guessing what went wrong.
+
+Correction: Read the error from bottom to top. The last line gives the error name and reason. The lines above show the file and exact line number.
+
+Wrong Data Types:
+
+Mistake: Adding an integer to a string from an input field ("25" + 5).
+
+Correction: Always check and cast data types explicitly (int(user_input) + 5).
+
+Missing Input Validation:
+
+Mistake: Assuming the user or frontend will always send complete, well-formed data.
+
+Correction: Always validate required keys and values at the API boundary before running business logic.
+
+Hard-Coded Secrets:
+
+Mistake: Putting passwords, API keys, and secret tokens directly inside source code.
+
+Correction: Store all credentials in environment variables loaded at runtime.
+
+Missing Authorization Checks:
+
+Mistake: Confirming a user is logged in, but forgetting to check whether they own the specific record they are attempting to view or edit.
+
+Correction: Always check record.owner_id == current_user.id.
+
+Testing Only the Success Path:
+
+Mistake: Only testing code with perfect inputs.
+
+Correction: Deliberately test empty inputs, negative numbers, missing headers, and malformed JSON to ensure clean error handling.
+
+Huge, Monolithic Functions:
+
+Mistake: Writing a single 200-line function that reads files, parses JSON, calls an AI, formats strings, and writes to a database.
+
+Correction: Break logic into small functions that each perform one clear task.
+
+Unnecessary Abstractions:
+
+Mistake: Creating complex class hierarchies and design patterns for simple scripts that only need a couple of functions.
+
+Correction: Keep it simple. Start with straightforward functions and introduce classes only when managing shared state.
+
+Dependency and Environment Confusion:
+
+Mistake: Installing packages globally without an active virtual environment, leading to conflicting package versions.
+
+Correction: Always create and activate a project-specific virtual environment (.venv) before running pip install.
+
+Symptom Patching vs Root Cause Debugging:
+
+Mistake: When a variable is None, blindly adding if var is None: var = "" without asking why it was None in the first place.
+
+Correction: Trace the data flow upstream to identify where the bad state originated and fix it at the source.
+
+REMEMBER:
+Great engineers are not people who never make mistakes; they are people who write clear code, test frequently, read error messages carefully, and fix root causes systematically.

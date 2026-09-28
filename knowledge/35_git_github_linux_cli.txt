@@ -1,0 +1,109 @@
+PURPOSE:
+To explain foundational version control workflows and essential Linux/WSL terminal commands for software development.
+
+WHAT IS IT?
+Git is a distributed version control tool that records changes to code over time. GitHub is a cloud platform for hosting Git repositories and collaborating with others. Linux/WSL (Windows Subsystem for Linux) is the operating system environment standard for modern software engineering.
+
+WHY IS IT USEFUL?
+Git allows you to experiment fearlessly. If an update breaks your app, you can roll back to a known working version instantly. Knowing basic terminal navigation allows you to configure servers, run scripts, manage packages, and automate tasks.
+
+CORE CONCEPTS:
+
+repository (repo): A directory tracked by Git containing all project files and history.
+
+git status: Inspecting modified, untracked, and staged files.
+
+git add: Staging files for the next commit snapshot.
+
+git commit: Recording staged changes permanently in history with a descriptive message.
+
+git log: Viewing past commit history.
+
+git branch: Creating an isolated line of development to work on a feature.
+
+git switch / checkout: Switching between branches.
+
+git remote: Linking a local repository to a remote server like GitHub.
+
+git pull: Fetching and merging updates from the remote repository to your machine.
+
+git push: Uploading local commits to the remote repository.
+
+git clone: Downloading an existing remote repository to your local machine.
+
+pull request (PR): A proposal on GitHub to merge changes from one branch into another with code review.
+
+Linux commands:
+
+pwd: Print working directory (shows where you are).
+
+ls: List files and folders.
+
+cd: Change directory.
+
+mkdir: Make a new directory.
+
+cp: Copy files or directories.
+
+mv: Move or rename files.
+
+rm: Remove/delete files.
+
+cat: Print file contents to the terminal.
+
+grep: Search for text matching a pattern inside files.
+
+python -m venv: Creating an isolated virtual environment.
+
+SIMPLE EXPLANATION:
+Git is like a video game save system. A commit is a save point you create when everything works. If you battle a boss (write a risky feature) and your program crashes, you don't start from scratch; you load your previous save point. GitHub is uploading your save game to cloud storage so you can share it or play from another computer.
+
+EXAMPLES:
+
+Everyday Git Workflow:
+
+1. Check what changed
+git status
+
+2. Stage changes
+git add app.py routes/chat.py
+
+3. Commit changes with a clear message
+git commit -m "Add input validation to /api/chat route"
+
+4. Push to GitHub
+git push origin main
+
+Essential Terminal Commands:
+
+Check current directory
+pwd
+
+Make a project folder and enter it
+mkdir my_project
+cd my_project
+
+Create and activate a Python virtual environment on Linux/WSL
+python3 -m venv .venv
+source .venv/bin/activate
+
+Search for a function across all Python files
+grep -rn "generate_chat_response" .
+
+COMMON MISTAKES:
+
+Committing sensitive files (.env, database files, virtual environments). Always configure .gitignore first.
+
+Writing vague commit messages such as "fixed stuff" or "update".
+
+Running rm -rf without verifying the path; deleting files in the terminal bypasses the desktop trash can.
+
+WHEN TO USE:
+Use Git from the very first line of code in any project. Use the Linux command line whenever managing servers, virtual environments, or development workflows.
+
+PROJECT CONNECTION:
+AI Creator Engine is maintained as a Git repository, allowing developers to clone the project, install dependencies inside a Linux/WSL virtual environment, and track improvements systematically.
+
+OFFICIAL RESOURCES:
+Git Official Documentation: https://git-scm.com/doc
+GitHub Documentation: https://docs.github.com/

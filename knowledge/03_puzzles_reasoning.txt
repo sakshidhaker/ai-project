@@ -1,0 +1,69 @@
+TITLE: PUZZLES AND LOGICAL REASONING
+
+PURPOSE:
+To help students develop algorithmic thinking, logical deduction, and step-by-step problem-solving skills.
+
+WHAT IS IT?
+Logic puzzles, number patterns, sequences, and reasoning exercises. These are problems that require you to think carefully and follow rules to find an answer, much like a computer follows instructions.
+
+WHY IS IT USEFUL?
+Programming is mostly logic. Before you can write code to solve a problem, you must know how to solve the problem in your head or on paper. Puzzles train your brain to recognize patterns and think systematically.
+
+CORE CONCEPTS:
+
+Number Patterns: Sequences of numbers that follow a specific mathematical rule.
+
+Logic Puzzles: Word problems where you use clues to figure out a specific outcome.
+
+Simple Probability: Understanding the likelihood of an event happening (e.g., flipping a coin).
+
+Algorithmic Thinking: Breaking a big problem down into small, clear steps.
+
+Reasoning Method: Making deductions based purely on given facts, not guesses.
+
+SIMPLE EXPLANATION:
+If someone tells you: "Alice is taller than Bob. Bob is taller than Charlie." You can use logical reasoning to figure out that Alice is taller than Charlie, even though nobody explicitly told you that.
+
+EXAMPLES:
+
+Number Pattern (The Fibonacci Sequence):
+Sequence: 0, 1, 1, 2, 3, 5, 8, 13...
+Rule: Add the two previous numbers together to get the next number (e.g., 5 + 8 = 13).
+
+Logic Puzzle:
+You have a 3-gallon jug and a 5-gallon jug, and an unlimited supply of water. How do you get exactly 4 gallons?
+Reasoning steps:
+
+Fill the 5-gallon jug.
+
+Pour from the 5-gallon into the 3-gallon jug until it is full. You now have 2 gallons left in the 5-gallon jug.
+
+Empty the 3-gallon jug.
+
+Pour the 2 gallons from the 5-gallon jug into the 3-gallon jug.
+
+Fill the 5-gallon jug completely.
+
+Pour from the 5-gallon jug into the 3-gallon jug until it is full. Since the 3-gallon jug already has 2 gallons, it only takes 1 gallon to fill it.
+
+You are left with exactly 4 gallons in the 5-gallon jug.
+
+COMMON MISTAKES:
+
+Guessing instead of calculating: Always map out the steps.
+
+Assuming rules that aren't there: Only use the information given in the puzzle.
+
+Getting frustrated: Logic puzzles are supposed to take time. It is normal to get stuck.
+
+WHEN TO USE:
+Use logic puzzles to warm up your brain before coding, or to practice breaking problems down into steps (algorithms).
+
+WHEN NOT TO USE:
+Don't get stuck on abstract puzzles if you need to build a practical project. Puzzles are practice; projects are the real goal.
+
+PROJECT CONNECTION:
+In the AI Creator Engine, the "Creator flow" uses algorithmic thinking to route tasks, select models, and generate structured JSON outputs.
+
+REMEMBER:
+Every complex piece of code is just a series of simple logical steps stacked together.

@@ -1,0 +1,78 @@
+TITLE: FLASK WEB FRAMEWORK
+
+PURPOSE:
+To explain how to build a backend web server and API using Flask.
+
+WHAT IS IT?
+Flask is a lightweight web framework for Python. It allows you to create a web server that listens for incoming HTTP requests (like when a user opens a webpage in a browser) and sends back HTML pages or JSON data.
+
+WHY IS IT USEFUL?
+Python scripts normally run in the terminal. Flask allows your Python scripts to be accessible over the internet via web browsers. It bridges the gap between your backend Python logic and the frontend user interface.
+
+CORE CONCEPTS:
+
+Flask app: The main server object.
+
+route (@app.route): A URL path (like /home or /api/chat).
+
+GET: Requesting data from the server.
+
+POST: Sending new data to the server.
+
+request: The object holding data the user sent.
+
+jsonify: Converting Python dictionaries into JSON to send back to the user.
+
+Blueprints: Organizing a large app into smaller, separate files.
+
+decorators: The @ symbol syntax used to link URLs to Python functions.
+
+sessions: Remembering user data (like login status) between requests.
+
+API structure: Building routes that return data (JSON) instead of websites (HTML).
+
+SIMPLE EXPLANATION:
+Flask is a receptionist at a building. A route is a door number. When a user knocks on door /api/chat (a route), the receptionist (Flask) triggers a specific Python function to answer the door, take the user's message, and hand back an answer.
+
+CODE EXAMPLES:
+
+A Basic Flask API:
+from flask import Flask, request, jsonify
+
+app = Flask(name)
+
+A GET route
+@app.route("/hello", methods=["GET"])
+def say_hello():
+return jsonify({"message": "Hello, World!"})
+
+A POST route (receives data)
+@app.route("/api/chat", methods=["POST"])
+def chat():
+# Get JSON sent by the frontend
+user_data = request.get_json()
+user_message = user_data.get("message", "No message sent")
+
+# Process it and return a response
+reply = f"You said: {user_message}"
+return jsonify({"reply": reply})
+if name == "main":
+app.run(debug=True)
+
+COMMON MISTAKES:
+
+Forgetting methods=["POST"]: By default, routes only accept GET requests. If a frontend form tries to POST data and you didn't allow it, Flask returns a 405 Method Not Allowed error.
+
+Returning raw dictionaries: Always wrap dictionaries in jsonify() so the browser understands the data type.
+
+WHEN TO USE:
+Use Flask for building APIs, web apps, and connecting Python Machine Learning models to web interfaces.
+
+WHEN NOT TO USE:
+Flask is synchronous by default. If you are building a massive, real-time chat application for millions of users, an asynchronous framework like FastAPI or Node.js might scale better.
+
+PROJECT CONNECTION:
+The entire AI Creator Engine backend is built on Flask. It uses /api/chat and /api/generate to receive requests from the JavaScript frontend, run AI models, and return the structured JSON responses.
+
+OFFICIAL RESOURCES:
+Flask Documentation: https://flask.palletsprojects.com/

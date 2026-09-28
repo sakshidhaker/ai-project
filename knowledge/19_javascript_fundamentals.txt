@@ -1,0 +1,80 @@
+TITLE: JAVASCRIPT FUNDAMENTALS
+
+PURPOSE:
+To introduce JavaScript, the programming language that runs inside web browsers to make websites interactive.
+
+WHAT IS IT?
+While HTML builds the structure of a webpage, JavaScript (JS) makes it "think" and act. It responds to clicks, changes text dynamically, and talks to backend servers without reloading the page.
+
+WHY IS IT USEFUL?
+If you are building a web application, you need JavaScript. Without it, the user would have to refresh the page every time they sent a chat message. JavaScript handles the frontend logic.
+
+CORE CONCEPTS:
+
+let / const: Creating variables (let can change, const cannot).
+
+variables, arrays, objects: Similar to Python's variables, lists, and dictionaries.
+
+functions / arrow functions: Reusable logic blocks.
+
+loops: for and while loops.
+
+promises & async/await: Waiting for slow tasks (like fetching data from an API) without freezing the webpage.
+
+DOM (Document Object Model): JavaScript's representation of the HTML page.
+
+events: Listening for user actions (clicks, typing).
+
+fetch(): The built-in JS function to send network requests to your backend.
+
+SIMPLE EXPLANATION:
+The DOM is like a puppet show. HTML is the puppet. JavaScript is the strings. When an "event" happens (the user clicks a button), JavaScript pulls a string to make the puppet move (changes the text on screen), or sends a runner (fetch) to get more information from the Python backend.
+
+CODE EXAMPLES:
+
+Variables and Arrow Functions:
+const greeting = "Hello";
+let count = 0;
+
+// Arrow function
+const add = (a, b) => {
+return a + b;
+};
+
+DOM and Events:
+// Grab a button from the HTML
+const myButton = document.getElementById("submit-btn");
+
+// Listen for a click
+myButton.addEventListener("click", () => {
+document.getElementById("output-text").innerText = "Button clicked!";
+});
+
+Async/Await and Fetch (Talking to Python):
+async function getChatReply() {
+// Send a request to the backend
+const response = await fetch('/api/chat', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ message: "Hello AI!" })
+});
+
+// Wait for the JSON response
+const data = await response.json();
+console.log(data.reply);
+}
+
+COMMON MISTAKES:
+
+Using var: Never use var in modern JavaScript. Always use const (default) or let (if the value will change).
+
+Forgetting await: If you don't await a fetch request, JavaScript won't wait for the server to reply and your variables will be empty ("Promise pending").
+
+WHEN TO USE:
+Use JavaScript on the frontend to handle UI interactions and communicate with your backend APIs.
+
+WHEN NOT TO USE:
+Avoid putting sensitive secrets, API keys, or heavy database logic in frontend JavaScript. Anyone can open their browser developer tools and see your code!
+
+OFFICIAL RESOURCES:
+MDN Web Docs: https://developer.mozilla.org/

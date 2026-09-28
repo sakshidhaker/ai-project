@@ -1,0 +1,69 @@
+TITLE: NUMPY BASICS
+
+PURPOSE:
+To introduce NumPy, the fundamental library for numerical computing and working with arrays in Python.
+
+WHAT IS IT?
+NumPy (Numerical Python) is a fast, powerful library for working with lists of numbers. It introduces the "NumPy Array", which is like a Python list but much faster and capable of doing complex math instantly.
+
+WHY IS IT USEFUL?
+Standard Python lists are too slow for Artificial Intelligence and Machine Learning. When dealing with thousands of numbers (like image pixels or word embeddings), NumPy does the math in a fraction of a second using a concept called "vectorized operations."
+
+CORE CONCEPTS:
+
+arrays: The main data structure in NumPy.
+
+shape: The dimensions of an array (e.g., 2 rows, 3 columns).
+
+dtype: The data type of the numbers inside (e.g., float32, int64).
+
+indexing & slicing: Selecting specific numbers or rows.
+
+vectorized operations: Applying math to a whole array at once without writing a loop.
+
+mean/sum/min/max: Built-in fast math functions.
+
+practical ML connection: All ML models eventually convert data into NumPy arrays.
+
+SIMPLE EXPLANATION:
+Imagine you have a list of 100 prices, and you want to add $5 to each. In normal Python, you write a loop and add $5 to each item one by one. In NumPy, you just say prices + 5, and it instantly updates every price at exactly the same time.
+
+CODE EXAMPLES:
+
+Creating Arrays and Vectorized Math:
+import numpy as np
+
+Create an array from a regular list
+prices = np.array([10.0, 20.0, 30.0])
+
+Vectorized operation: Add 5 to everything instantly
+new_prices = prices + 5
+print(new_prices)  # Outputs: [15. 25. 35.]
+
+Shape, Mean, and Max:
+data = np.array([
+[1, 2, 3],
+[4, 5, 6]
+])
+
+print(data.shape)       # Outputs: (2, 3) meaning 2 rows, 3 columns
+print(data.mean())      # Outputs: 3.5
+print(data.max())       # Outputs: 6
+
+COMMON MISTAKES:
+
+Mixing up Python lists and NumPy arrays: Python lists don't have a .shape attribute, and doing list + 5 causes an error.
+
+Type confusion: NumPy arrays like to keep all elements as the exact same data type (dtype). If you put a string into an array of integers, NumPy might convert everything to text!
+
+WHEN TO USE:
+Use NumPy anytime you are doing math on large amounts of numbers, specifically in Machine Learning, data science, or engineering.
+
+WHEN NOT TO USE:
+Do not use NumPy for simple scripts that just track a few names or strings. Normal Python lists and dictionaries are better for non-numerical tasks.
+
+PROJECT CONNECTION:
+In AI and RAG (Retrieval-Augmented Generation), text is converted into "embeddings" (long lists of decimal numbers). Under the hood, these embeddings are stored and compared using NumPy arrays.
+
+OFFICIAL RESOURCES:
+NumPy Documentation: https://numpy.org/doc/

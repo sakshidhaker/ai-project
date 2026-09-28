@@ -1,0 +1,86 @@
+/* ============================================================
+   STUDENT CODE MAP — SHARED CSS
+   PURPOSE: Keep the polished product look in one small stylesheet.
+   CONNECTION: All HTML pages -> /static/style.css.
+   EDIT HERE: Change colors, spacing, layout and component appearance.
+   ============================================================ */
+:root { font-family: Inter, system-ui, -apple-system, sans-serif; color:#17202a; background:#f5f7fb; line-height:1.5; }
+* { box-sizing:border-box; }
+body { margin:0; }
+a { color:#235f9f; }
+[hidden] { display:none !important; }
+button,input,textarea,select { font:inherit; }
+button { cursor:pointer; border:0; border-radius:12px; padding:11px 16px; background:#17202a; color:#fff; font-weight:800; }
+button:disabled { opacity:.55; cursor:wait; }
+label { display:grid; gap:6px; }
+input,textarea,select { width:100%; padding:11px 13px; border:1px solid #c9d3df; border-radius:12px; background:#fff; }
+textarea { resize:vertical; }
+.eyebrow { font-size:.74rem; font-weight:900; letter-spacing:.13em; }
+.subtitle,.sidebar-note,.hint,.small-text,.tiny-text,.form-hint,.user-badge { color:#687586; }
+.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+
+/* AUTH */
+.auth-page { min-height:100vh; display:grid; place-items:center; padding:24px; background:radial-gradient(circle at top,#fff,#edf1f6); }
+.auth-card { width:min(430px,100%); padding:34px; background:#fff; border:1px solid #dce3ec; border-radius:22px; box-shadow:0 22px 70px rgba(23,32,42,.1); }
+.auth-form { display:grid; gap:14px; margin-top:22px; }
+.auth-message { padding:10px 12px; border-radius:10px; background:#fff0f0; color:#983333; }
+.auth-link { text-align:center; }
+
+/* LAYOUT + SIDEBAR */
+.app-layout { min-height:100vh; display:grid; grid-template-columns:250px 1fr; }
+.sidebar { padding:22px 16px; background:#11161c; color:#fff; }
+.sidebar h2 { margin:.1rem 0 .4rem; }
+.side-nav { display:grid; gap:6px; margin:24px 0; }
+.nav-link { color:#dbe4ed; text-decoration:none; padding:10px 12px; border-radius:10px; }
+.nav-link.active,.nav-link:hover { background:#202a34; color:#fff; }
+.sidebar-actions { display:grid; gap:8px; }
+.secondary { width:100%; text-align:center; background:#202832; border:1px solid #394552; }
+.full { margin-top:14px; }
+.sidebar-section { border-top:1px solid #2c3540; margin-top:18px; padding-top:18px; }
+.pipeline-list { margin:10px 0 0 20px; padding:0; color:#cdd7e2; }
+.pipeline-list li { padding:3px 0; }
+.sidebar-model-card { padding:12px 14px; border:1px solid #35404c; border-radius:12px; background:#1a2028; }
+.sidebar-model-card span { display:block; margin-top:4px; font-size:.78rem; color:#aab4c0; }
+
+/* WORKSPACE */
+.workspace { min-width:0; }
+.topbar { min-height:66px; display:flex; justify-content:space-between; align-items:center; gap:12px; padding:0 26px; background:#fff; border-bottom:1px solid #dde5ed; }
+.local-badge { margin-left:8px; color:#2e7245; font-size:.8rem; }
+.user-badge { font-size:.82rem; }
+.mode-tabs { display:flex; gap:6px; padding:12px 26px; background:#fff; border-bottom:1px solid #e5eaf0; }
+.mode-button { background:transparent; color:#17202a; }
+.mode-button.active { background:#17202a; color:#fff; }
+.content-width,.chat-messages,.chat-input-row,.status,.hint,.creator-card,.result-card,.error-card,.card { width:min(980px,calc(100% - 52px)); margin-left:auto; margin-right:auto; }
+.content-width,.page-section { padding-top:28px; }
+.intro-row,.page-heading,.result-heading { display:flex; justify-content:space-between; align-items:flex-start; gap:20px; }
+.creator-card,.result-card,.error-card,.card { margin-top:26px; padding:24px; border:1px solid #dfe5ed; border-radius:20px; background:#fff; box-shadow:0 12px 34px rgba(23,32,42,.05); }
+.card { box-shadow:none; }
+.error-card { border-color:#e1a3a3; }
+
+/* CHAT + CREATOR */
+.chat-messages { min-height:47vh; max-height:58vh; overflow:auto; margin-top:18px; }
+.chat-message { margin-bottom:12px; padding:15px 18px; border:1px solid #e0e6ed; border-radius:18px; background:#fff; }
+.chat-message.user { background:#f0f3f7; }
+.chat-label { margin-bottom:5px; color:#6d7988; font-size:.75rem; font-weight:900; }
+.chat-content { white-space:pre-wrap; overflow-wrap:anywhere; }
+.chat-input-row { display:grid; grid-template-columns:1fr auto; gap:10px; margin-top:10px; }
+.hint,.status { padding:10px 12px; border-radius:10px; }
+.status { margin-top:10px; background:#f0f3f7; color:#687586; }
+.form-row { display:grid; grid-template-columns:180px 1fr; gap:14px; align-items:end; margin-top:14px; }
+.pill { display:inline-flex; padding:7px 10px; border-radius:999px; background:#edf7ef; color:#2d7c4c; font-size:.77rem; font-weight:800; }
+.result-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:12px 0 18px; }
+.result-grid span { display:block; color:#708092; font-size:.78rem; }
+.pipeline-box { margin:16px 0; padding:14px; background:#f7f9fb; border-radius:12px; }
+.download-button,.button-link { display:inline-block; padding:11px 15px; border-radius:11px; background:#17202a; color:#fff; text-decoration:none; font-weight:800; }
+
+/* ADMIN */
+.admin-search-form { display:grid; gap:8px; }
+.table-wrap { overflow:auto; margin-top:18px; }
+.data-table { width:100%; border-collapse:collapse; min-width:650px; }
+.data-table th,.data-table td { padding:11px; border-bottom:1px solid #e1e6ec; text-align:left; }
+.data-table th { background:#f7f9fb; font-size:.82rem; }
+.danger-button { padding:7px 10px; border:1px solid #d49393; background:#fff; color:#9b3232; }
+
+/* RESPONSIVE */
+@media(max-width:900px){ .app-layout{display:block}.sidebar{padding:14px 16px}.sidebar-note{display:none}.side-nav{display:flex;overflow:auto;margin:12px 0}.topbar{padding:10px 14px}.intro-row,.page-heading{flex-direction:column}.chat-messages{min-height:45vh} }
+@media(max-width:640px){ .content-width,.chat-messages,.chat-input-row,.status,.hint,.creator-card,.result-card,.error-card,.card{width:calc(100% - 24px)}.auth-card{padding:24px}.chat-input-row,.form-row,.result-grid{grid-template-columns:1fr}.mode-tabs{overflow:auto}.topbar{flex-wrap:wrap}.sidebar h2{display:inline;margin-left:8px;font-size:1rem} }

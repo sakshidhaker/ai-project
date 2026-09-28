@@ -1,0 +1,51 @@
+TITLE: PYTHON FUNCTIONS
+
+PURPOSE:
+Explain how to define small reusable Python functions and provide correct patterns for code generation.
+
+CORE CONCEPTS:
+- def creates a function.
+- Parameters receive input.
+- return sends a result back to the caller.
+- print() shows a message but does not return that message as a reusable value.
+- Local variables exist inside the function unless deliberately returned or stored elsewhere.
+
+EXAMPLE: BASIC FUNCTION
+
+```python
+def add_numbers(a, b):
+    result = a + b
+    return result
+
+print(add_numbers(5, 3))
+```
+
+EXAMPLE: VALIDATION FUNCTION
+
+```python
+def is_even(number):
+    return number % 2 == 0
+```
+
+EXAMPLE: DEFAULT ARGUMENT
+
+```python
+def greet(name, greeting="Hello"):
+    return greeting + ", " + name
+```
+
+PRINT VS RETURN:
+
+```python
+def show_answer(number):
+    print(number * 2)
+
+
+def get_answer(number):
+    return number * 2
+```
+
+The first function displays a result. The second gives the result back to the calling code.
+
+GENERATION RULE:
+When a user asks for a Python function, define the function clearly, include required imports, use parameters for outside data, and return the result when the caller needs it.

@@ -1,0 +1,48 @@
+TITLE: PYTHON FUNDAMENTALS
+
+PURPOSE:
+Provide beginner-friendly Python building blocks that are safe to reuse in generated examples.
+
+CORE CONCEPTS:
+Variables store values. Data types describe those values. Conditions choose actions. Loops repeat actions. Functions group reusable logic. Lists/dictionaries store collections. Modules provide extra functionality. try/except handles expected errors.
+
+EXAMPLE: VARIABLES
+
+```python
+name = "Alice"
+age = 25
+height = 5.6
+is_student = True
+```
+
+EXAMPLE: CONDITIONS
+
+```python
+if age >= 18:
+    print("You are an adult.")
+else:
+    print("You are a minor.")
+```
+
+EXAMPLE: LOOP
+
+```python
+for number in [1, 2, 3]:
+    print(number)
+```
+
+EXAMPLE: FUNCTION
+
+```python
+def square(number):
+    return number * number
+```
+
+COMMON MISTAKES:
+- Incorrect indentation.
+- Mixing text and numbers without conversion.
+- Using a variable before creating it.
+- Forgetting to return a value when the caller needs one.
+
+PROJECT CONNECTION:
+Python is used throughout the AI Creator Engine backend. User input, RAG context, validation, and file generation are all handled by Python code.

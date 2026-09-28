@@ -1,0 +1,66 @@
+TITLE: JAVA BASICS
+
+PURPOSE:
+To introduce Java, a popular, statically typed, object-oriented programming language, and compare its concepts to Python.
+
+WHAT IS IT?
+Java is a strictly typed language used heavily in enterprise software and Android app development. Unlike Python, which figures out data types automatically, Java requires you to declare exactly what type of data every variable will hold.
+
+WHY IS IT USEFUL?
+Learning Java teaches you about strict type checking and formal Object-Oriented Programming (OOP). Because it is strict, it catches many errors before the code even runs (during the "compile" step).
+
+CORE CONCEPTS:
+
+variables & types: Declaring int, double, boolean, and String.
+
+if / loops: Decision making and repeating blocks.
+
+methods: Java's word for functions that live inside classes.
+
+arrays: Fixed-size lists of a single data type.
+
+classes & objects: Everything in Java must live inside a class.
+
+concept comparison with Python: Python uses indentation; Java uses curly braces {} and semicolons ;.
+
+SIMPLE EXPLANATION:
+If Python is a casual conversation, Java is a formal legal document. In Python, you can say age = 10. In Java, you must formally declare: "I am creating an integer named age, and its value is 10."
+
+CODE EXAMPLES:
+
+Basic Java Class and Method:
+public class Main {
+// This is the starting point of every Java program
+public static void main(String[] args) {
+
+    // Variables and Types
+    int age = 25;
+    double price = 19.99;
+    boolean isStudent = true;
+    String name = "Alice"; // String uses capital 'S'
+    
+    // If Statement
+    if (age >= 18) {
+        System.out.println(name + " is an adult.");
+    }
+    
+    // Loop
+    for (int i = 0; i < 3; i++) {
+        System.out.println("Count: " + i);
+    }
+}
+}
+
+COMMON MISTAKES:
+
+Forgetting the semicolon: Every statement in Java must end with a ;.
+
+Confusing String with primitive types: In Java, int is lowercase (primitive), but String is uppercase because it is actually an Object.
+
+Array sizes: Unlike Python lists, standard Java arrays cannot grow or shrink once created.
+
+WHEN TO USE:
+Use Java for large-scale enterprise backend systems, Android applications, or when a project requires strict type safety and high performance.
+
+WHEN NOT TO USE:
+Do not use Java for quick scripting, simple data analysis, or fast AI prototyping. Python is much better for those tasks.

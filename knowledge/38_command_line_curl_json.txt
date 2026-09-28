@@ -1,0 +1,72 @@
+TITLE: TESTING APIS WITH CURL AND JSON
+
+PURPOSE:
+To teach how to test, inspect, and debug backend HTTP APIs directly from the command line using curl.
+
+WHAT IS IT?
+curl is a command-line tool used to transfer data to and from servers using network protocols like HTTP and HTTPS.
+
+WHY IS IT USEFUL?
+When an API endpoint behaves incorrectly, testing it through a web browser UI introduces confusion: is the bug in the JavaScript frontend or in the Python backend? curl bypasses the frontend entirely, allowing you to test the raw backend directly.
+
+CORE CONCEPTS:
+
+curl basics: Executing curl <URL> in the terminal.
+
+GET requests: Default behavior when fetching data from an endpoint.
+
+POST requests: Using -X POST to send data to the server.
+
+headers: Using -H to set request metadata such as Content-Type: application/json or Authorization: Bearer <token>.
+
+JSON bodies: Using -d to provide raw JSON strings.
+
+testing localhost: Sending requests to [http://127.0.0.1:5000](http://127.0.0.1:5000) while your Flask development server is running.
+
+reading status and results: Using the -i or -v flag to inspect response headers and HTTP status codes (like 200, 400, 401, 500).
+
+debugging API requests: Verifying that the backend accepts expected payloads and rejects invalid ones.
+
+SIMPLE EXPLANATION:
+curl is like making a phone call directly to a server. Instead of clicking buttons on a website, you type the exact message and header into your terminal and see the server's exact raw answer immediately.
+
+COMMAND EXAMPLES:
+
+Basic GET Request:
+curl http://127.0.0.1:5000/hello
+
+GET Request with Headers and Status Code Inspection:
+curl -i http://127.0.0.1:5000/api/status
+
+POST Request Sending JSON Payload:
+curl -X POST http://127.0.0.1:5000/api/chat
+
+-H "Content-Type: application/json"
+
+-d '{"message": "Explain functions in Python", "model": "local"}'
+
+POST Request with Authorization Header:
+curl -X POST http://127.0.0.1:5000/api/generate
+
+-H "Content-Type: application/json"
+
+-H "Authorization: Bearer my_secret_token"
+
+-d '{"task": "summarize", "text": "Flask is a lightweight web framework."}'
+
+Formatting JSON Output using Python tool:
+curl -s http://127.0.0.1:5000/api/chat -H "Content-Type: application/json" -d '{"message": "hi"}' | python3 -m json.tool
+
+COMMON MISTAKES:
+
+Forgetting -H "Content-Type: application/json": When sending JSON with -d, Flask's request.get_json() returns None unless this header is present.
+
+Single vs double quotes on Windows: In Windows Command Prompt, JSON inside -d must use escaped double quotes or double quotes on the outside. In Linux/WSL/Mac shells, wrap -d in single quotes.
+
+Testing a port that is not running: Forgetting to start the Flask app before running the curl command.
+
+WHEN TO USE:
+Use curl to verify backend endpoints during development, test automated scripts, and isolate bugs when troubleshooting client-server issues.
+
+WHEN NOT TO USE:
+Do not use curl as a replacement for automated test suites; use pytest for repeatable, programmatic testing.

@@ -1,0 +1,33 @@
+TITLE: STUDY AND LEARNING STRATEGIES
+
+PURPOSE:
+Help students learn concepts rather than only copy answers.
+
+LEARNING CYCLE:
+Learn -> Implement -> See Result -> Extend.
+
+USEFUL METHODS:
+Flashcards test memory.
+Practice problems make students solve a task themselves.
+Worked examples show a complete pattern before students modify it.
+The Feynman technique asks a student to explain an idea in simple language.
+
+FOR PROGRAMMING:
+A good programming learning cycle is:
+1. Understand the concept.
+2. Read a small correct example.
+3. Type and run it.
+4. Change one part.
+5. Observe the result.
+
+IMPORTANT:
+Examples of student prompts are not instructions for the AI to copy. They are only demonstrations of how a learner might ask a question.
+
+COMMON MISTAKES:
+Copying code without understanding it.
+Skipping basic concepts.
+Changing many parts at once.
+Assuming that a generated answer must be correct just because it looks convincing.
+
+PROJECT CONNECTION:
+The AI Creator Engine is a teaching-first application. The knowledge base supplies reference material, while the student uses the output to learn, implement, see a result, and extend the idea.

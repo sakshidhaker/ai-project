@@ -1,0 +1,87 @@
+TITLE: GO AND RUST BASICS
+
+PURPOSE:
+To introduce Go and Rust, two modern compiled languages designed to solve the problems of older languages like C++ and Java.
+
+WHAT IS IT?
+Go (Golang) was created by Google to be incredibly simple and fast at handling web servers and thousands of simultaneous tasks. Rust was created to have the speed of C++ but with mathematical guarantees that your memory won't crash.
+
+WHY IS IT USEFUL?
+If Python is too slow for your backend, you usually upgrade to Go or Rust. Go is famous for simple web APIs and cloud tools (like Docker). Rust is famous for building ultra-safe, blazingly fast core systems.
+
+CORE CONCEPTS (GO):
+
+variables: Strongly typed, but Go can guess the type (:=).
+
+functions: Can return multiple values easily.
+
+slices: Go's dynamic arrays (like Python lists).
+
+structs: Grouping data together.
+
+errors basics: Go does not use try/except. Functions return errors explicitly, and you must check them.
+
+CORE CONCEPTS (RUST):
+
+variables: Immutable by default (cannot be changed unless marked mut).
+
+functions: Strict input and output types.
+
+Vec: Rust's dynamic array (Vector).
+
+structs: Grouping data.
+
+ownership concept: Rust's unique memory rule—only one variable can "own" a piece of data at a time. This prevents crashes without slowing down the program.
+
+Result basics: Rust's safe way of handling errors and success states.
+
+SIMPLE EXPLANATION:
+
+Python is a friendly scooter.
+
+C++ is a Formula 1 race car with no seatbelts.
+
+Go is a highly efficient bullet train moving people (data) quickly.
+
+Rust is a Formula 1 race car with a computer that refuses to let you crash into walls.
+
+CODE EXAMPLES:
+
+Go Basics:
+package main
+import "fmt"
+
+func main() {
+// Go infers this is a string
+name := "Alice"
+fmt.Println("Hello,", name)
+
+// Slice (dynamic array)
+scores := []int{10, 20}
+scores = append(scores, 30)
+}
+
+Rust Basics:
+fn main() {
+// Must use 'mut' to allow changes
+let mut score = 100;
+score += 50;
+
+println!("Score is: {}", score);
+
+// Vector
+let mut numbers: Vec<i32> = Vec::new();
+numbers.push(10);
+}
+
+COMMON MISTAKES:
+
+Go: Ignoring errors. If a Go function returns an error, you MUST handle it, or the compiler complains.
+
+Rust: Fighting the "Borrow Checker". Beginners get frustrated when Rust refuses to compile because two parts of the code try to change data at the same time (ownership violation).
+
+WHEN TO USE:
+Use Go for microservices, network tools, and concurrent web servers. Use Rust when you need maximum C++ speed but want zero memory crashes.
+
+WHEN NOT TO USE:
+Do not use them for Data Science, standard Machine Learning, or AI scripting. Python absolutely dominates the AI ecosystem.

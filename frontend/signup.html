@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign up - AI Creator Engine</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="auth-page">
+  <!--
+    SECTION: SIGNUP PAGE
+    PURPOSE: Collect Name, Email, and Password for the single users table.
+    CONNECTION: POST /api/auth/signup -> backend/api/auth_api.py -> auth.py -> database.py.
+    IMPORTANT: There is intentionally no username and no confirm-password field.
+  -->
+  <main class="auth-card">
+    <p class="eyebrow">AI CREATOR ENGINE</p>
+    <h1>Create your account.</h1>
+    <p class="subtitle">Start with a simple account, then open your AI workspace.</p>
+
+    <!-- SECTION: SIGNUP FORM
+         Browser -> Flask form route. Python performs all validation and hashing. -->
+    <form class="auth-form" action="/api/auth/signup" method="POST">
+      <label for="signup-name">Name
+        <input id="signup-name" type="text" name="name" maxlength="80" autocomplete="name" required>
+      </label>
+      <label for="signup-email">Email
+        <input id="signup-email" type="email" name="email" maxlength="160" autocomplete="email" required>
+      </label>
+      <label for="signup-password">Password
+        <input id="signup-password" type="password" name="password" minlength="8" autocomplete="new-password" required>
+      </label>
+      <p class="form-hint">Use at least 8 characters with uppercase, lowercase, a number, and a special character.</p>
+      <button type="submit">Create Account</button>
+    </form>
+
+    <!-- Jinja displays a Python validation message when one is returned. -->
+    {% if error %}<p class="auth-message">{{ error }}</p>{% endif %}
+    <p class="auth-link">Already have an account? <a href="/login">Login</a></p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,50 @@
+TITLE: PYTHON STANDARD LIBRARY
+
+PURPOSE:
+Provide correct examples of useful Python modules that require no pip installation.
+
+USEFUL MODULES:
+random, pathlib, json, csv, math, datetime, re, os, sys, collections.
+
+EXAMPLE: RANDOM CHOICE
+
+```python
+import random
+
+choices = ["rock", "paper", "scissors"]
+computer_choice = random.choice(choices)
+print(computer_choice)
+```
+
+EXAMPLE: PATHLIB
+
+```python
+from pathlib import Path
+
+folder = Path("my_data")
+file_path = folder / "document.txt"
+print(file_path.exists())
+```
+
+EXAMPLE: DATETIME
+
+```python
+from datetime import datetime
+
+now = datetime.now()
+print(now.strftime("%Y-%m-%d %H:%M"))
+```
+
+EXAMPLE: CSV
+
+```python
+import csv
+
+with open("people.csv", "r", encoding="utf-8") as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        print(row["name"])
+```
+
+COMMON MISTAKE:
+Using a module without importing it. Generated code should always include the imports it needs.

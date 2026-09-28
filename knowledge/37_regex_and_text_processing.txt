@@ -1,0 +1,99 @@
+TITLE: REGULAR EXPRESSIONS AND TEXT PROCESSING
+
+PURPOSE:
+To explain how to validate, search, and manipulate text strings using regular expressions and Python's string methods.
+
+WHAT IS IT?
+A regular expression (regex) is a pattern-matching language used to check whether a string matches a specific format (such as an email, phone number, or date) or to extract pieces of text from unstructured documents.
+
+WHY IS IT USEFUL?
+Standard string methods like .startswith() or .find() are great for simple checks, but they cannot easily express complex rules like "a string with 3 letters, followed by 4 digits, followed by a domain name". Regex solves this in one pattern.
+
+CORE CONCEPTS:
+
+regex pattern: A string describing the text shape you want to match.
+
+re.search: Scanning through a string to find the first location where a pattern matches.
+
+re.match: Checking if a pattern matches strictly at the beginning of a string.
+
+re.findall: Returning all non-overlapping matches of a pattern as a list of strings.
+
+re.sub: Finding matches and replacing them with a substitute string.
+
+common pattern symbols:
+
+\d: Any digit (0-9).
+
+\w: Any word character (letter, digit, underscore).
+
+\s: Any whitespace (space, tab, newline).
+
++: One or more repetitions.
+
+*: Zero or more repetitions.
+
+[a-z]: Any lowercase letter.
+
+^: Start of string.
+
+$: End of string.
+
+practical validation: Checking emails, usernames, and formats.
+
+when ordinary string methods are better: Using .lower(), .strip(), .replace(), and in whenever rules are simple.
+
+SIMPLE EXPLANATION:
+Regex is like a stencil. If you have a stencil shaped like a phone number (###) ###-####, you can lay it over a newspaper page; only the text that fits through the holes gets highlighted.
+
+CODE EXAMPLES:
+
+Using Python re Module:
+import re
+
+Finding all numbers in a document
+text = "Item A costs 45 dollars and Item B costs 120 dollars."
+numbers = re.findall(r"\d+", text)
+print("Found numbers:", numbers)  # Outputs: ['45', '120']
+
+Validating a simple username format (letters and numbers only, 3 to 12 characters)
+username = "coder_42"
+pattern = r"^[a-zA-Z0-9_]{3,12}$"
+
+if re.match(pattern, username):
+print("Valid username")
+else:
+print("Invalid username")
+
+Replacing sensitive data
+log_line = "User phone is 555-123-4567 in record."
+clean_log = re.sub(r"\d{3}-\d{3}-\d{4}", "[REDACTED]", log_line)
+print(clean_log)
+
+Ordinary String Methods vs Regex:
+
+Simple check: do not use regex for this!
+email = "test@example.com"
+if "@" in email and email.endswith(".com"):
+print("Basic check passed")
+
+Cleaning text:
+raw_input = "   Hello World!   \n"
+clean_input = raw_input.strip().lower()  # "hello world!"
+
+COMMON MISTAKES:
+
+Using complex regex when a simple string method like .startswith() or .split() is faster and more readable.
+
+Forgetting the raw string prefix (r"..."), which prevents Python from treating backslashes as escape characters.
+
+Writing over-complicated regex patterns that are impossible for team members to read or maintain.
+
+WHEN TO USE:
+Use regex for parsing complex structured strings, log file scraping, and validating formal format specifications.
+
+WHEN NOT TO USE:
+Do not use regex for HTML parsing; HTML is not regular and is best parsed using dedicated tools like BeautifulSoup.
+
+OFFICIAL RESOURCES:
+Python re module documentation: https://docs.python.org/3/library/re.html

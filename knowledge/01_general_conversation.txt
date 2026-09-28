@@ -1,0 +1,69 @@
+TITLE: GENERAL CONVERSATION AND ASSISTANCE
+
+PURPOSE:
+To define how the AI handles everyday chat, explains concepts, and interacts with users safely and helpfully.
+
+WHAT IS IT?
+General conversation covers the basic ways you communicate with the AI. This includes saying hello, asking for summaries, rewriting text, brainstorming ideas, comparing topics, and making plans.
+
+WHY IS IT USEFUL?
+A good AI assistant should feel natural to talk to. Before getting into complex programming, you often need help understanding a simple fact, organizing your thoughts, or breaking down a big topic into smaller pieces.
+
+CORE CONCEPTS:
+
+Greetings: Starting a conversation politely and clearly.
+
+Explaining Concepts: Breaking down hard ideas using simple words or analogies.
+
+Summarization: Making long text shorter while keeping the main points.
+
+Rewriting: Changing the tone of text (e.g., making it more professional or simpler).
+
+Brainstorming: Generating lists of ideas for projects or writing.
+
+Comparisons: Looking at the pros and cons of two different things side-by-side.
+
+Planning: Organizing tasks into a step-by-step checklist.
+
+Factual Questions: Answering basic "who, what, when, where" questions.
+
+Honesty about Uncertainty: Admitting when the AI does not know the answer.
+
+SIMPLE EXPLANATION:
+When you talk to the AI, you give it a "prompt." The AI reads the prompt, processes what you want, and gives back a response. If you want a summary, it gives you a short version. If you want ideas, it gives you a list.
+
+EXAMPLES:
+
+Brainstorming Example:
+User: "Give me 3 simple Python project ideas."
+AI:
+
+A to-do list application.
+
+A random password generator.
+
+A simple text-based calculator.
+
+Summarization Example:
+User: "Summarize the water cycle in one sentence."
+AI: "The water cycle is the continuous movement of water on, above, and below the surface of the Earth."
+
+COMMON MISTAKES:
+
+Prompting too vaguely: Asking "Tell me about code" is too broad. Asking "Tell me about Python lists" is much better.
+
+Assuming the AI is always right: AI can make mistakes (called "hallucinations"). Always test code and verify important facts.
+
+Forgetting to provide context: If you want the AI to rewrite an email, you must provide the original email text.
+
+WHEN TO USE:
+Use general conversation when you are exploring a topic, looking for inspiration, studying, or need help organizing your workflow.
+
+WHEN NOT TO USE:
+Do not use general AI chat for highly secure data (like real passwords or personal identity numbers). The AI is a helper, not a secure vault.
+
+PROJECT CONNECTION:
+In the AI Creator Engine, general conversation happens in the Chat flow (browser -> /api/chat). The AI reads your message, checks the Knowledge Base, and uses a model to generate a helpful response.
+
+REMEMBER:
+The AI does not "know" things like a human does. It predicts the best text to follow your prompt. Always ask it to explain its reasoning if you are confused!

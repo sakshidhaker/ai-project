@@ -1,0 +1,483 @@
+FILE: 33_api_credentials_security.txt
+
+TITLE: API CREDENTIALS AND APPLICATION SECURITY
+
+PURPOSE:
+To explain how to protect secrets, handle user authentication, and secure web applications and AI APIs.
+
+WHAT IS IT?
+Application security covers the practices and tools used to protect data, keys, and user accounts from unauthorized access or theft.
+
+WHY IS IT USEFUL?
+If you leak an API key on GitHub, attackers can steal your account and run up thousands of dollars in cloud bills within minutes. If you store plain-text passwords, any database leak compromises every user account. Security must be designed into an application from the beginning.
+
+CORE CONCEPTS:
+
+authentication: Verifying the identity of a user (verifying who you are).
+
+authorization: Verifying what permissions an authenticated user has (verifying what you are allowed to do).
+
+sessions: Temporary state stored on the server or in encrypted cookies to keep a user logged in across multiple requests.
+
+password hashing: Converting a plain-text password into a one-way mathematical hash using secure algorithms like bcrypt or argon2. Never store raw passwords.
+
+API key handling: Keeping secret keys out of source code by using environment variables.
+
+secret storage: Storing secrets in environment variables or .env files that are ignored by version control.
+
+encryption concept: Scrambling data so only someone with the secret key can decrypt and read it.
+
+credential IDs: Referencing keys by internal identifiers rather than exposing raw key strings in the frontend.
+
+user ownership: Ensuring that user A can only read, update, or delete records that belong to user A.
+
+common security mistakes: Hard-coding secrets, committing .env files, trusting unsanitized user inputs, and missing authorization checks on API endpoints.
+
+SIMPLE EXPLANATION:
+Authentication is showing your passport at an airport gate. Authorization is having a boarding pass for Seat 14B—it lets you sit in that seat, but it does not let you into the cockpit. Environment variables are like a locked safe in your office; you keep your keys in the safe, never taped to the front door.
+
+CODE EXAMPLES:
+
+Loading API Keys from Environment Variables:
+import os
+
+Read the key from the operating system environment
+api_key = os.getenv("OPENAI_API_KEY")
+
+if not api_key:
+raise ValueError("Missing OPENAI_API_KEY environment variable. Set it before running.")
+
+Password Hashing with Werkzeug (Flask built-in):
+from werkzeug.security import generate_password_hash, check_password_hash
+
+When a user registers:
+plain_password = "SuperSecretPassword123"
+hashed_password = generate_password_hash(plain_password)
+
+When a user logs in:
+user_input = "SuperSecretPassword123"
+is_valid = check_password_hash(hashed_password, user_input)
+print("Login successful:", is_valid)
+
+User Ownership Check in an API Route:
+def delete_document(document_id, current_user_id):
+# Always check both the item ID and the owner ID
+doc = db.find_by_id(document_id)
+if not doc:
+return {"error": "Document not found"}, 404
+if doc.user_id != current_user_id:
+return {"error": "Forbidden: You do not own this document"}, 403
+db.delete(doc)
+return {"message": "Deleted successfully"}, 200
+
+COMMON MISTAKES:
+
+Hard-coding API keys directly inside Python or JavaScript files.
+
+Committing .env files to Git repositories because .gitignore was missing.
+
+Checking authentication without checking authorization (for example, verifying a user is logged in, but allowing them to view other users' private documents by changing an ID in the URL).
+
+Using reversible encryption or simple encoding (like Base64) instead of cryptographic one-way hashing for passwords.
+
+WHEN TO USE:
+Implement environment-variable secret handling and ownership checks on every project that touches external APIs, user data, or databases.
+
+WHEN NOT TO USE:
+Do not create complex custom cryptography algorithms from scratch. Always use well-tested standard libraries like hashlib, werkzeug.security, or cryptography.
+
+PROJECT CONNECTION:
+In AI Creator Engine, user authentication protects the chat and generation endpoints. API keys for online providers (Gemini, OpenAI) are loaded from environment variables or encrypted settings, keeping credentials safe from browser exposure.
+
+OFFICIAL RESOURCES:
+OWASP Top Ten Security Vulnerabilities: https://owasp.org/www-project-top-ten/
+
+==================================================
+
+FILE: 34_testing_debugging_apps.txt
+
+TITLE: TESTING AND DEBUGGING APPLICATIONS
+
+PURPOSE:
+To teach how to verify code quality using automated tests and how to trace bugs systematically to their root cause.
+
+WHAT IS IT?
+Testing is writing code that checks whether your application code behaves correctly under expected and unexpected conditions. Debugging is the disciplined process of finding and removing bugs when tests or users expose a failure.
+
+WHY IS IT USEFUL?
+Manual testing by clicking through an app becomes slow, incomplete, and error-prone as features grow. Automated tests run in seconds and give you confidence that adding a new feature did not break existing functionality.
+
+CORE CONCEPTS:
+
+unit tests: Testing a single function or small unit of logic in total isolation.
+
+integration tests: Testing how two or more components work together (for example, testing an API endpoint calling a database).
+
+end-to-end (E2E) tests: Testing the entire application path from user interface down to the database and back.
+
+pytest: The standard, widely adopted testing framework in Python.
+
+assertions: Statements (assert condition) that verify expected outcomes; if false, the test fails.
+
+fixtures concept: Reusable setup and teardown helpers in pytest that prepare test data or mock connections before a test runs.
+
+mocking: Replacing slow or external dependencies (like external LLM API calls or live credit card charges) with simulated responses during tests.
+
+testing success/failure paths: Writing tests for valid inputs (happy path) as well as invalid inputs, missing data, and error conditions (failure paths).
+
+API testing: Sending mock HTTP requests to Flask endpoints using Flask's test client and validating the status code and JSON output.
+
+root-cause debugging: Tracing an error back to where bad state was first introduced, rather than patching over the crash site.
+
+SIMPLE EXPLANATION:
+Automated testing is like an automated vehicle inspection line. Instead of taking the car on the highway to see if the brakes work, a machine runs standardized checks on the brake pads, lights, and tire pressure before the car leaves the garage.
+
+CODE EXAMPLES:
+
+Basic Unit Tests with pytest:
+
+In a file named test_math_helper.py
+def add(a, b):
+return a + b
+
+def divide(a, b):
+if b == 0:
+raise ValueError("Cannot divide by zero")
+return a / b
+
+def test_add_success():
+assert add(2, 3) == 5
+assert add(-1, 1) == 0
+
+def test_divide_by_zero():
+import pytest
+with pytest.raises(ValueError):
+divide(10, 0)
+
+Testing a Flask API Endpoint with a Test Client:
+
+In test_api.py
+import pytest
+from app import app
+
+@pytest.fixture
+def client():
+app.config["TESTING"] = True
+with app.test_client() as test_client:
+yield test_client
+
+def test_health_route(client):
+response = client.get("/health")
+assert response.status_code == 200
+assert response.get_json() == {"status": "ok"}
+
+def test_chat_missing_message(client):
+# Failure path test: verify endpoint returns 400 when message is missing
+response = client.post("/api/chat", json={})
+assert response.status_code == 400
+
+COMMON MISTAKES:
+
+Only testing the happy path and never testing empty strings, missing fields, or invalid types.
+
+Calling real external paid APIs during automated test runs instead of mocking them.
+
+Writing brittle tests that depend on specific execution order instead of being independent.
+
+Catching exceptions with broad try/except blocks and ignoring the stack trace during debugging.
+
+WHEN TO USE:
+Use pytest for every reusable library, API route, validation helper, and data processing pipeline.
+
+WHEN NOT TO USE:
+Do not write end-to-end tests for every tiny cosmetic UI tweak. Focus unit and integration tests where business logic, calculations, and security checks happen.
+
+PROJECT CONNECTION:
+AI Creator Engine includes automated pytest suites for validating routing logic, API responses, authentication checks, and prompt formatting without making real external API calls.
+
+OFFICIAL RESOURCES:
+pytest Documentation: https://docs.pytest.org/
+
+==================================================
+
+FILE: 35_git_github_linux_cli.txt
+
+TITLE: GIT, GITHUB, AND LINUX COMMAND LINE
+
+PURPOSE:
+To explain foundational version control workflows and essential Linux/WSL terminal commands for software development.
+
+WHAT IS IT?
+Git is a distributed version control tool that records changes to code over time. GitHub is a cloud platform for hosting Git repositories and collaborating with others. Linux/WSL (Windows Subsystem for Linux) is the operating system environment standard for modern software engineering.
+
+WHY IS IT USEFUL?
+Git allows you to experiment fearlessly. If an update breaks your app, you can roll back to a known working version instantly. Knowing basic terminal navigation allows you to configure servers, run scripts, manage packages, and automate tasks.
+
+CORE CONCEPTS:
+
+repository (repo): A directory tracked by Git containing all project files and history.
+
+git status: Inspecting modified, untracked, and staged files.
+
+git add: Staging files for the next commit snapshot.
+
+git commit: Recording staged changes permanently in history with a descriptive message.
+
+git log: Viewing past commit history.
+
+git branch: Creating an isolated line of development to work on a feature.
+
+git switch / checkout: Switching between branches.
+
+git remote: Linking a local repository to a remote server like GitHub.
+
+git pull: Fetching and merging updates from the remote repository to your machine.
+
+git push: Uploading local commits to the remote repository.
+
+git clone: Downloading an existing remote repository to your local machine.
+
+pull request (PR): A proposal on GitHub to merge changes from one branch into another with code review.
+
+Linux commands:
+
+pwd: Print working directory (shows where you are).
+
+ls: List files and folders.
+
+cd: Change directory.
+
+mkdir: Make a new directory.
+
+cp: Copy files or directories.
+
+mv: Move or rename files.
+
+rm: Remove/delete files.
+
+cat: Print file contents to the terminal.
+
+grep: Search for text matching a pattern inside files.
+
+python -m venv: Creating an isolated virtual environment.
+
+SIMPLE EXPLANATION:
+Git is like a video game save system. A commit is a save point you create when everything works. If you battle a boss (write a risky feature) and your program crashes, you don't start from scratch; you load your previous save point. GitHub is uploading your save game to cloud storage so you can share it or play from another computer.
+
+EXAMPLES:
+
+Everyday Git Workflow:
+
+1. Check what changed
+git status
+
+2. Stage changes
+git add app.py routes/chat.py
+
+3. Commit changes with a clear message
+git commit -m "Add input validation to /api/chat route"
+
+4. Push to GitHub
+git push origin main
+
+Essential Terminal Commands:
+
+Check current directory
+pwd
+
+Make a project folder and enter it
+mkdir my_project
+cd my_project
+
+Create and activate a Python virtual environment on Linux/WSL
+python3 -m venv .venv
+source .venv/bin/activate
+
+Search for a function across all Python files
+grep -rn "generate_chat_response" .
+
+COMMON MISTAKES:
+
+Committing sensitive files (.env, database files, virtual environments). Always configure .gitignore first.
+
+Writing vague commit messages such as "fixed stuff" or "update".
+
+Running rm -rf without verifying the path; deleting files in the terminal bypasses the desktop trash can.
+
+WHEN TO USE:
+Use Git from the very first line of code in any project. Use the Linux command line whenever managing servers, virtual environments, or development workflows.
+
+PROJECT CONNECTION:
+AI Creator Engine is maintained as a Git repository, allowing developers to clone the project, install dependencies inside a Linux/WSL virtual environment, and track improvements systematically.
+
+OFFICIAL RESOURCES:
+Git Official Documentation: https://git-scm.com/doc
+GitHub Documentation: https://docs.github.com/
+
+==================================================
+
+FILE: 36_project_recipes.txt
+
+TITLE: PRACTICAL PROJECT RECIPES
+
+PURPOSE:
+To provide step-by-step recipes showing how to build small, complete projects from concept to working implementation and extension.
+
+WHAT IS IT?
+A collection of beginner-friendly recipes for practical software patterns: CLI apps, Flask APIs, CRUD apps, ML classifiers, RAG search, AI chat interfaces, artifact generators, and tested modules.
+
+WHY IS IT USEFUL?
+Theory makes sense only when applied. Seeing the complete flow: Idea -> Steps -> Minimal Implementation -> Extension teaches you how real software systems are built from smaller parts.
+
+RECIPE 1: CLI APP (TODO LIST)
+
+Idea: A terminal app to add and view daily tasks.
+
+Steps:
+
+Define a list in memory.
+
+Run a while loop displaying a menu.
+
+Read input and append or display tasks.
+
+Small Implementation:
+tasks = []
+while True:
+cmd = input("Command (add/list/exit): ").strip()
+if cmd == "add":
+tasks.append(input("Task: "))
+elif cmd == "list":
+for i, t in enumerate(tasks, 1):
+print(f"{i}. {t}")
+elif cmd == "exit":
+break
+
+Extension: Save tasks to a JSON file on exit and reload them on startup.
+
+RECIPE 2: FLASK API ENDPOINT
+
+Idea: A JSON endpoint that checks if a word is a palindrome.
+
+Steps:
+
+Create Flask instance.
+
+Define POST route receiving JSON payload.
+
+Validate input string.
+
+Compare word with its reverse and return JSON.
+
+Small Implementation:
+from flask import Flask, request, jsonify
+app = Flask(name)
+
+@app.route("/api/palindrome", methods=["POST"])
+def check_palindrome():
+data = request.get_json() or {}
+text = data.get("text", "").lower().replace(" ", "")
+if not text:
+return jsonify({"error": "Missing 'text' field"}), 400
+is_palindrome = text == text[::-1]
+return jsonify({"text": text, "is_palindrome": is_palindrome}), 200
+
+if name == "main":
+app.run(port=5000)
+
+Extension: Add an automated pytest test verifying palindromes and non-palindromes.
+
+RECIPE 3: CRUD APPLICATION (SQLITE)
+
+Idea: Manage customer contacts in a database.
+
+Steps:
+
+Connect to SQLite and create a contacts table if not exists.
+
+Implement helper functions for Create, Read, Update, Delete.
+
+Use parameterized queries.
+
+Small Implementation:
+import sqlite3
+
+def get_db():
+conn = sqlite3.connect("contacts.db")
+conn.execute("CREATE TABLE IF NOT EXISTS contacts (id INTEGER PRIMARY KEY, name TEXT, email TEXT)")
+return conn
+
+def create_contact(name, email):
+with get_db() as conn:
+conn.execute("INSERT INTO contacts (name, email) VALUES (?, ?)", (name, email))
+
+def list_contacts():
+with get_db() as conn:
+return conn.execute("SELECT id, name, email FROM contacts").fetchall()
+
+Extension: Expose these operations through Flask routes.
+
+RECIPE 4: MACHINE LEARNING CLASSIFIER
+
+Idea: Classify text messages as "urgent" or "normal".
+
+Steps:
+
+Prepare sample training text and labels.
+
+Build a pipeline with CountVectorizer / TfidfVectorizer and LogisticRegression.
+
+Train model using fit.
+
+Predict label on new text.
+
+Small Implementation:
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import make_pipeline
+
+texts = ["Server down immediately", "Emergency outage", "Lunch menu today", "Meeting notes recap"]
+labels = ["urgent", "urgent", "normal", "normal"]
+
+model = make_pipeline(TfidfVectorizer(), LogisticRegression())
+model.fit(texts, labels)
+
+prediction = model.predict(["System outage reported"])
+print("Predicted category:", prediction[0])
+
+Extension: Save the trained model with joblib to use inside a Flask app.
+
+RECIPE 5: RAG RETRIEVAL PIPELINE
+
+Idea: Search through local text chunks to find the best passage for an AI prompt.
+
+Steps:
+
+Split documents into small paragraphs.
+
+Convert paragraphs to embeddings using Sentence Transformers.
+
+Calculate cosine similarity against a user query embedding.
+
+Return top match.
+
+Extension: Inject the retrieved match into an LLM prompt as context.
+
+RECIPE 6: AI ARTIFACT GENERATOR (STRUCTURED JSON TO PDF/DOCX)
+
+Idea: Ask an LLM for structured JSON and convert valid output into a clean downloadable file.
+
+Steps:
+
+Prompt LLM with strict JSON schema instructions.
+
+Parse and validate returned JSON string.
+
+If valid, pass data to a PDF or DOCX generation library (like ReportLab or python-docx).
+
+Return file path to user.
+
+Extension: Add repair logic that re-prompts the model if the first JSON was malformed.
+
+REMEMBER:
+Always implement the smallest working version first, verify it works, and only then add complexity.

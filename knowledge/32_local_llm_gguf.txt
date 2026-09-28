@@ -1,0 +1,53 @@
+TITLE: LOCAL LLMS AND GGUF
+
+PURPOSE:
+To explain how to run powerful AI models entirely on your own computer without the internet.
+
+WHAT IS IT?
+Normally, LLMs run on massive server farms owned by big companies (via APIs). "Local inference" means running an AI model on your own hardware. GGUF is a special file format that makes this possible by shrinking the model down to run on standard consumer computers.
+
+WHY IS IT USEFUL?
+Privacy! When you run a local LLM, your chat data and private documents never leave your laptop. It is also completely free (no API token costs) and works offline.
+
+CORE CONCEPTS:
+
+local inference: Running the AI math on your local CPU or GPU.
+
+GGUF: (GPT-Generated Unified Format) A heavily optimized file format for storing AI models.
+
+llama.cpp: The core C++ engine that actually loads and runs GGUF files extremely fast.
+
+quantization: The mathematical trick used to shrink models. It takes highly precise numbers (32-bit floats) and rounds them down (to 4-bit or 8-bit). It reduces the file size from 16GB down to 4GB with very little loss in intelligence.
+
+model size: 8B means 8 billion parameters. The larger the number, the smarter the AI, but the more RAM it requires.
+
+memory: You must have enough system RAM or GPU VRAM to load the model file.
+
+CPU inference: Running the model on the main computer chip (slower).
+
+GPU concepts / CUDA: Running the model on the Graphics Card (much faster). CUDA is Nvidia's software for doing this.
+
+hardware-aware selection: Checking if the computer can handle a model before trying to load it.
+
+local-first reasoning: Preferring local tools for privacy and falling back to cloud APIs only when needed.
+
+SIMPLE EXPLANATION:
+A standard AI model is like a giant, highly detailed oil painting. It takes a massive truck (a server farm) to move it. Quantization turns the oil painting into a slightly lower-resolution JPEG. You lose a tiny bit of detail, but now it fits on your phone or laptop (GGUF). llama.cpp is the lightweight image viewer that lets you open it.
+
+COMMON MISTAKES:
+
+Out of Memory (OOM) Errors: Trying to load a 70B parameter model on a laptop with only 8GB of RAM. The computer will freeze or crash. Always match the GGUF file size to your available memory.
+
+Expecting API speeds on a CPU: If you don't have a dedicated graphics card (GPU), local LLMs will generate text slowly (like reading speed), which is normal.
+
+WHEN TO USE:
+Use local models when working with sensitive corporate data, personal journals, or offline applications.
+
+WHEN NOT TO USE:
+Do not use local models if you need state-of-the-art coding abilities (like GPT-4 level) or if you are running on a very old computer with almost no RAM.
+
+PROJECT CONNECTION:
+The AI Creator Engine is "local-first." It uses llama-cpp-python to load GGUF models directly on the user's machine, enabling full RAG pipelines that operate securely and completely offline.
+
+OFFICIAL RESOURCES:
+llama.cpp GitHub: https://github.com/ggml-org/llama.cpp

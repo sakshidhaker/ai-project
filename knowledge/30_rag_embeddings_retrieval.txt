@@ -1,0 +1,80 @@
+TITLE: RAG AND VECTOR RETRIEVAL
+
+PURPOSE:
+To explain Retrieval-Augmented Generation (RAG)—how to give an AI model a memory of your private documents.
+
+WHAT IS IT?
+RAG (Retrieval-Augmented Generation) is a technique where you search your own documents for facts, and then paste those facts into the prompt before asking the AI a question. This stops the AI from hallucinating because it has an "open book" to read from.
+
+WHY IS IT USEFUL?
+LLMs are frozen in time; they don't know the news from today, and they don't know your company's private employee handbook. Instead of spending millions to re-train the AI, RAG lets the AI dynamically read your documents.
+
+CORE CONCEPTS:
+
+RAG: The overall system of searching for data and generating an answer.
+
+document ingestion: Loading text, PDFs, or code into the system.
+
+text extraction: Pulling the raw words out of the files.
+
+chunking: Cutting a 100-page book into small 500-word paragraphs so the AI doesn't get overwhelmed.
+
+overlap: Keeping a few sentences of overlap between chunks so concepts don't get cut in half.
+
+embeddings: An AI model that turns a chunk of text into a long list of numbers (a vector) representing its meaning.
+
+vector store (ChromaDB): A specialized database built to store and search through embeddings.
+
+similarity search: Comparing the numbers of the user's question with the numbers of the chunks to find a match.
+
+top-k retrieval: Grabbing the top 3 or 5 most relevant chunks.
+
+metadata: Tags attached to a chunk (like "Author: Alice" or "Source: manual.txt").
+
+context: The retrieved chunks that are pasted into the prompt.
+
+prompt: "Answer the question using ONLY this context: [chunks]".
+
+retrieval flow: Question -> Embed -> Search -> Inject -> Generate.
+
+user ownership: Keeping vector databases local means your private data never leaves your computer.
+
+RAG limitations: If the search step fails to find the right chunk, the AI cannot answer the question.
+
+SIMPLE EXPLANATION:
+RAG is taking an open-book test.
+
+The user asks a question.
+
+Python uses a Vector Database to quickly scan the textbook index and pull out the 3 most relevant paragraphs (Retrieval).
+
+Python gives the AI the question AND the 3 paragraphs (Augmentation).
+
+The AI reads the paragraphs and writes a clear answer (Generation).
+
+EXAMPLES:
+
+Retrieval Flow Logic (Conceptual):
+query = "What is the company WiFi password?"
+
+1. Turn query into numbers
+query_vector = embed_model.encode(query)
+
+2. Search database for closest matches
+best_chunk = vector_db.search(query_vector)
+
+3. Ask the AI
+ai_prompt = f"Using this text: {best_chunk}, answer: {query}"
+response = llm.generate(ai_prompt)
+
+COMMON MISTAKES:
+
+Chunking too big: If a chunk is 10,000 words, the AI might lose the important detail in the noise (called the "lost in the middle" problem).
+
+Forgetting to embed the question: You must use the exact same embedding model to turn the user's question into numbers as you used for the documents, or they won't match mathematically.
+
+WHEN TO USE:
+Use RAG anytime you want an LLM to answer questions about private data, specific documentation, or up-to-date facts.
+
+PROJECT CONNECTION:
+The AI Creator Engine uses RAG. This exact Knowledge Base file is chunked, turned into embeddings via Sentence Transformers, stored in ChromaDB, and retrieved whenever you ask a question about the project!

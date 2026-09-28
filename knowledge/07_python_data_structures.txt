@@ -1,0 +1,78 @@
+TITLE: PYTHON DATA STRUCTURES
+
+PURPOSE:
+To explain how to store and manage collections of data using lists, tuples, sets, and dictionaries.
+
+WHAT IS IT?
+Data structures are specialized formats for organizing and storing data. Instead of creating a hundred different variables for a hundred names, you put them all inside one data structure.
+
+WHY IS IT USEFUL?
+Different tasks require different organizations. If you want a checklist in order, use a List. If you need a fast lookup (like a phone book), use a Dictionary.
+
+CORE CONCEPTS:
+
+List: Ordered, changeable (mutable). Uses square brackets [].
+
+Tuple: Ordered, unchangeable (immutable). Uses parentheses ().
+
+Set: Unordered, unique items only. Uses curly braces {}.
+
+Dictionary (dict): Key-value pairs. Unordered, changeable. Uses curly braces {key: value}.
+
+Indexing: Grabbing one item using its position (starting at 0).
+
+Slicing: Grabbing a chunk of items (e.g., items 2 through 5).
+
+Mutation: Changing the data after it is created.
+
+Membership: Checking if something is inside (using the "in" keyword).
+
+SIMPLE EXPLANATION:
+
+List: A train where each car holds an item in a specific order.
+
+Tuple: A train that has been welded shut. You can look at the items, but you can't add or remove them.
+
+Set: A basket of balls. No duplicates allowed, and you don't care about order.
+
+Dictionary: A row of labeled lockers. You use the label (key) to open the locker and get the item (value).
+
+CODE EXAMPLES:
+
+List (Ordered, Changeable):
+fruits = ["apple", "banana", "cherry"]
+fruits.append("orange")  # Adds to the end
+print(fruits[0])         # Outputs "apple"
+
+Dictionary (Key-Value):
+user = {
+"name": "Alice",
+"role": "admin"
+}
+print(user["name"])      # Lookup by key, outputs "Alice"
+user["age"] = 30         # Adding a new key-value pair
+
+Membership check:
+if "banana" in fruits:
+print("Found the banana!")
+
+COMMON MISTAKES:
+
+Index out of range (IndexError): Trying to get item number 10 from a list that only has 3 items. Remember, counting starts at 0!
+
+Missing Key (KeyError): Trying to lookup a dictionary key that doesn't exist. Use the .get() method to avoid crashes (e.g., user.get("age")).
+
+Trying to change a Tuple: Tuples cannot be appended to or modified once created.
+
+WHEN TO USE:
+
+List: When order matters and you need to add/remove items.
+
+Tuple: When you have a fixed set of items that should never change.
+
+Set: When you want to remove duplicates from a list very quickly.
+
+Dictionary: When you want to look up data by a name or ID (like a database record).
+
+PROJECT CONNECTION:
+In the AI Creator Engine, conversation history is stored as a List of Dictionaries. Each dictionary represents one message, with keys for "role" (user or AI) and "content" (the message text).

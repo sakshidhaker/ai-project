@@ -1,0 +1,60 @@
+TITLE: AI CREATOR ENGINE TEACHING EDITION PROJECT MAP
+
+PURPOSE:
+Show students how a request moves through the simplified application.
+
+CORE IDEA:
+Learn -> Implement -> See Result -> Extend.
+Python handles web routing, authentication, validation, RAG orchestration, and document generation.
+The local Qwen model generates language; it does not replace the deterministic Python parts of the application.
+
+CHAT FLOW:
+Browser
+-> small JavaScript request
+-> Flask /api/chat
+-> semantic RAG search in knowledge/*.txt
+-> prompt construction in backend/ai.py
+-> local Qwen
+-> Flask JSON response
+-> browser displays the reply
+
+CREATOR FLOW:
+Browser
+-> small JavaScript request
+-> Flask /api/generate
+-> semantic RAG search
+-> Python-focused retrieval for Python program requests
+-> backend/ai.py builds the generation prompt
+-> local Qwen
+-> backend/validator.py checks the result
+-> one retry when validation fails
+-> pdf_generator.py OR docx_generator.py
+-> downloadable file
+
+RAG:
+Knowledge files are loaded, split into chunks, converted to embeddings with Sentence Transformers, and searched with vector similarity.
+The Teaching Edition keeps this as real semantic retrieval rather than hardcoded question matching.
+
+PYTHON CREATOR SCOPE:
+The current project deliberately optimizes program generation for Python.
+Other programming languages may be explained in Chat, but runnable program generation is not guaranteed for them in this version.
+
+DATABASE:
+SQLite contains the users table only.
+There are no chat-history, generation-history, model, provider, credential, analytics, or artifact tables.
+
+MODEL:
+The project downloads one small Qwen GGUF model automatically when it is missing.
+The model path and repository are configured in backend/config.py.
+
+IMPORTANT FILE CONNECTIONS:
+backend/main.py -> registers API blueprints and starts the app.
+backend/auth.py -> login, signup, sessions, and password checks.
+backend/database.py -> SQLite user storage.
+backend/rag.py -> semantic knowledge retrieval.
+backend/ai.py -> prompt building and Qwen inference.
+backend/validator.py -> generated-output checks.
+backend/pdf_generator.py -> PDF creation.
+backend/docx_generator.py -> DOCX creation.
+backend/api/*.py -> Flask HTTP endpoints used by the browser.
+frontend/app.js -> collects browser input, sends it to Flask, and displays returned data.

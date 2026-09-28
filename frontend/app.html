@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Creator Engine</title>
+  <!-- CONNECTION: This one small stylesheet controls the appearance of every page. -->
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="app-body">
+  <!--
+    FILE: frontend/app.html
+    PURPOSE: Main student workspace for Chat and Create.
+    CONNECTION: Jinja -> visible page; app.js -> browser transport; Flask APIs -> Python work.
+    EDIT HERE: Change labels/layout. Do not move AI/business logic into this file.
+  -->
+  <div class="app-layout">
+    <!-- SECTION: SIDEBAR
+         Purpose: Navigation plus a visible teaching map of the AI pipeline. -->
+    <aside class="sidebar">
+      <p class="eyebrow">AI CREATOR ENGINE</p>
+      <h2>Local AI Lab</h2>
+      <p class="sidebar-note">Chat with local AI, use the knowledge base, and create real files.</p>
+
+      <!-- CONNECTION: Jinja shows Admin only when the current email is the configured admin. -->
+      <nav class="side-nav">
+        <a class="nav-link active" href="/app">Chat &amp; Create</a>
+        {% if is_admin %}<a class="nav-link" href="/admin">Admin</a>{% endif %}
+      </nav>
+
+      <!-- New Chat changes only the visible browser panel. Log out is a normal HTML form. -->
+      <div class="sidebar-actions">
+        <button id="new-chat" class="secondary" type="button">New chat</button>
+        <form action="/api/auth/logout" method="POST"><button class="secondary" type="submit">Log out</button></form>
+      </div>
+
+      <!-- SECTION: PIPELINE MAP
+           This is teaching UI only; Python performs every AI stage. -->
+      <section class="sidebar-section">
+        <h3>Pipeline</h3>
+        <ol class="pipeline-list">
+          <li>Your prompt</li>
+          <li>Semantic RAG</li>
+          <li>Local Qwen</li>
+          <li>Validation</li>
+          <li>Answer / file</li>
+        </ol>
+      </section>
+
+      <!-- SECTION: MODEL STATUS
+           Jinja receives model_ready from backend/main.py. -->
+      <section class="sidebar-section">
+        <h3>Model</h3>
+        <div class="sidebar-model-card">
+          <strong>{{ model_name }}</strong>
+          <span>{% if model_ready %}Downloaded{% else %}Download check failed / pending{% endif %}</span>
+        </div>
+      </section>
+    </aside>
+
+    <main class="workspace">
+      <!-- SECTION: TOP BAR -->
+      <header class="topbar">
+        <div><strong>AI Creator Engine</strong> <span class="local-badge">● Local-first</span></div>
+        <span class="user-badge">{{ user.name }} · {{ user.email }}</span>
+      </header>
+
+      <!-- SECTION: MODE TABS
+           JavaScript only switches which panel is visible. -->
+      <div class="mode-tabs">
+        <button id="chat-mode-button" class="mode-button active" type="button">Chat</button>
+        <button id="creator-mode-button" class="mode-button" type="button">Create Artifact</button>
+      </div>
+
+      <!-- SECTION: CHAT
+           Connection: chat form -> app.js -> /api/chat -> chat_api.py -> rag.py -> ai.py. -->
+      <section id="chat-mode" class="mode-panel">
+        <div class="content-width intro-row">
+          <div>
+            <p class="eyebrow">CHAT</p>
+            <h1>Ask the local AI.</h1>
+            <p class="subtitle">Every message follows the same RAG → Qwen path.</p>
+          </div>
+          <span class="pill">{{ model_name }}</span>
+        </div>
+
+        <div id="chat-messages" class="chat-messages"></div>
+        <div id="chat-status" class="status">Ready.</div>
+
+        <!-- Browser collects text; Python decides what to do with it. -->
+        <form id="chat-form" class="chat-input-row">
+          <label class="sr-only" for="chat-input">Message</label>
+          <textarea id="chat-input" rows="3" placeholder="Ask about Python, Flask, RAG, machine learning, APIs…"></textarea>
+          <button id="send-chat" type="submit">Send</button>
+        </form>
+        <p class="hint">Knowledge retrieval is always enabled. The browser only sends your text to Python and displays Python's result.</p>
+      </section>
+
+      <!-- SECTION: CREATE
+           Connection: create form -> app.js -> /api/generate -> document_api.py. -->
+      <section id="creator-mode" class="mode-panel" hidden>
+        <div class="creator-card">
+          <div class="intro-row">
+            <div>
+              <p class="eyebrow">CREATE</p>
+              <h1>Create a real file.</h1>
+              <p class="subtitle">Describe it, choose PDF or DOCX, and let Python run the GenAI pipeline.</p>
+            </div>
+            <span class="pill">RAG + Qwen + validation</span>
+          </div>
+
+          <form id="creator-form">
+            <label for="prompt">What should the engine create?</label>
+            <textarea id="prompt" rows="8" placeholder="Create a beginner-friendly report about supervised learning."></textarea>
+            <div class="form-row">
+              <label for="artifact-type">File type
+                <select id="artifact-type"><option value="pdf">PDF</option><option value="docx">DOCX</option></select>
+              </label>
+              <button id="generate-button" type="submit">Generate</button>
+            </div>
+          </form>
+          <div id="creator-status" class="status">Ready. RAG → Qwen → validation → file.</div>
+        </div>
+
+        <!-- SECTION: RESULT
+             Python has already generated and validated the content when this appears. -->
+        <section id="result-card" class="result-card" hidden>
+          <div class="result-heading">
+            <div><p class="eyebrow">RESULT</p><h2 id="result-title">Generation complete</h2></div>
+            <span id="result-artifact" class="pill">PDF</span>
+          </div>
+          <div class="result-grid">
+            <div><span>Model</span><strong id="result-model">Local Qwen</strong></div>
+            <div><span>Validation</span><strong id="result-validation">Passed</strong></div>
+          </div>
+          <label for="content-preview">Generated text preview</label>
+          <textarea id="content-preview" rows="12" readonly></textarea>
+          <div id="generation-stages" class="pipeline-box"></div>
+          <a id="download-link" class="download-button" href="#">Download file</a>
+        </section>
+
+        <!-- SECTION: ERROR
+             Python returns stage/message/suggestion; app.js only displays them. -->
+        <section id="error-card" class="error-card" hidden>
+          <p class="eyebrow">ERROR</p>
+          <h2>Generation needs another try.</h2>
+          <p><strong>Stage:</strong> <span id="error-stage"></span></p>
+          <p><strong>What happened:</strong> <span id="error-message"></span></p>
+          <p><strong>What to try:</strong> <span id="error-suggestion"></span></p>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <!-- CONNECTION: Small browser event/transport layer; all real work stays in Python. -->
+  <script src="/static/app.js"></script>
+</body>
+</html>

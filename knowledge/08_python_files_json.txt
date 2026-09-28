@@ -1,0 +1,44 @@
+TITLE: PYTHON FILES AND JSON
+
+PURPOSE:
+Teach file input/output and JSON with complete examples that can be reused in generated programs.
+
+EXAMPLE: WRITE AND READ TEXT
+
+```python
+with open("notes.txt", "w", encoding="utf-8") as file:
+    file.write("Hello World!")
+
+with open("notes.txt", "r", encoding="utf-8") as file:
+    content = file.read()
+
+print(content)
+```
+
+EXAMPLE: SAVE JSON
+
+```python
+import json
+
+data = {"name": "Bob", "score": 100}
+
+with open("save_game.json", "w", encoding="utf-8") as file:
+    json.dump(data, file, indent=4)
+```
+
+EXAMPLE: LOAD JSON
+
+```python
+import json
+
+with open("save_game.json", "r", encoding="utf-8") as file:
+    loaded_data = json.load(file)
+
+print(loaded_data["name"])
+```
+
+COMMON MISTAKES:
+- Forgetting encoding="utf-8".
+- Using write mode when append mode was intended.
+- Reading a file that does not exist.
+- Forgetting to import json before calling json.load/json.dump.

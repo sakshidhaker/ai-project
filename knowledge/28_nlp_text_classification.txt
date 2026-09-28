@@ -1,0 +1,52 @@
+TITLE: NLP AND TEXT CLASSIFICATION
+
+PURPOSE:
+To explain how computers process, understand, and categorize human language using Natural Language Processing.
+
+WHAT IS IT?
+Natural Language Processing (NLP) is a branch of AI focused on text and speech. Text classification is an NLP task that assigns a label to a piece of text (like labeling a movie review as "Positive" or "Negative").
+
+WHY IS IT USEFUL?
+Before we had massive LLMs like ChatGPT, we needed fast, efficient ways to analyze thousands of documents, sort support tickets, and block spam. Classical NLP techniques are still much faster and cheaper for these tasks than GenAI.
+
+CORE CONCEPTS:
+
+NLP: The overall field of text AI.
+
+tokenization concept: Chopping a sentence into smaller pieces (words or sub-words) called tokens.
+
+text preprocessing: Removing punctuation, making everything lowercase, and removing filler words like "the" or "and" (stop words).
+
+TF-IDF: (Term Frequency-Inverse Document Frequency) A formula that scores how important a word is. If a word appears a lot in one document but rarely in others, it gets a high score.
+
+text classification: Putting text into predefined buckets.
+
+sentiment analysis: Determining if text is positive, negative, or neutral.
+
+embeddings concept: Converting a word or sentence into a dense list of numbers (a vector) that captures its actual meaning.
+
+semantic similarity: Checking how mathematically close two embeddings are to see if they mean the same thing.
+
+practical text routing: Using a classifier to send a user's prompt to the correct backend function.
+
+SIMPLE EXPLANATION:
+Computers cannot read. They only do math. To classify an email as Spam, NLP tokenizes the email into words. It then uses TF-IDF to turn those words into a table of numbers. Finally, a machine learning model does math on those numbers and outputs a probability: "99% chance this is Spam."
+
+EXAMPLES:
+Tokenization:
+"I love Python!" -> ["I", "love", "Python", "!"]
+
+Semantic Similarity:
+"Puppy" and "Dog" have totally different letters, but their "Embeddings" (number lists) will be very similar because they share the same meaning.
+
+COMMON MISTAKES:
+
+Ignoring spelling/casing: To a computer, "Apple" and "apple" are two completely different words unless you preprocess them to lowercase first.
+
+Using LLMs for simple sorting: Don't use a massive GenAI model to check if an email is spam. TF-IDF and Logistic Regression can do it 1000x faster for free.
+
+WHEN TO USE:
+Use NLP and text classification for routing user intents, sorting tickets, analyzing customer sentiment, or finding keywords.
+
+PROJECT CONNECTION:
+In the AI Creator Engine, user prompts are preprocessed, converted to numbers using TF-IDF, and passed to a Logistic Regression model to figure out if the user wants a simple chat or a complex artifact generation.

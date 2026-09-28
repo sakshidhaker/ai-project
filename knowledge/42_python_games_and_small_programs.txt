@@ -1,0 +1,137 @@
+TITLE: PYTHON GAMES AND SMALL PROGRAM EXAMPLES
+
+PURPOSE:
+Give the model strong, small reference patterns for common beginner requests such as games, menus, calculators, and simple utilities.
+
+IMPORTANT:
+These are reusable patterns. Do not copy a pattern blindly when the user's request needs different behaviour.
+
+EXAMPLE 1: ROCK PAPER SCISSORS
+
+```python
+import random
+
+
+def decide_winner(user_choice, computer_choice):
+    """Return the result from the player's point of view."""
+    if user_choice == computer_choice:
+        return "It's a tie!"
+
+    user_wins = (
+        (user_choice == "rock" and computer_choice == "scissors")
+        or (user_choice == "scissors" and computer_choice == "paper")
+        or (user_choice == "paper" and computer_choice == "rock")
+    )
+
+    if user_wins:
+        return "You win!"
+    return "You lose!"
+
+
+def rock_paper_scissors():
+    """Play one round of Rock Paper Scissors."""
+    choices = ["rock", "paper", "scissors"]
+    user_choice = input("Choose rock, paper, or scissors: ").strip().lower()
+
+    if user_choice not in choices:
+        print("Invalid choice.")
+        return
+
+    computer_choice = random.choice(choices)
+    print("Computer:", computer_choice)
+    print(decide_winner(user_choice, computer_choice))
+
+
+if __name__ == "__main__":
+    rock_paper_scissors()
+```
+
+WHY THIS PATTERN IS GOOD:
+- random is imported before it is used.
+- Both choices use the same lowercase values.
+- Winner logic compares both choices.
+- The function can be tested independently.
+- The program has a clear entry point.
+
+EXAMPLE 2: NUMBER GUESSING GAME
+
+```python
+import random
+
+
+def play_guessing_game():
+    target = random.randint(1, 10)
+    guess = int(input("Guess a number from 1 to 10: "))
+
+    if guess == target:
+        print("Correct!")
+    elif guess < target:
+        print("Too low. The answer was", target)
+    else:
+        print("Too high. The answer was", target)
+
+
+if __name__ == "__main__":
+    play_guessing_game()
+```
+
+EXAMPLE 3: SIMPLE CALCULATOR
+
+```python
+def calculate(first, operator, second):
+    if operator == "+":
+        return first + second
+    if operator == "-":
+        return first - second
+    if operator == "*":
+        return first * second
+    if operator == "/":
+        if second == 0:
+            return "Cannot divide by zero."
+        return first / second
+    return "Unknown operator."
+```
+
+EXAMPLE 4: MENU PROGRAM
+
+```python
+def show_menu():
+    print("1. Add")
+    print("2. View")
+    print("3. Exit")
+
+
+def run_menu():
+    while True:
+        show_menu()
+        choice = input("Choose an option: ").strip()
+
+        if choice == "1":
+            print("Add selected.")
+        elif choice == "2":
+            print("View selected.")
+        elif choice == "3":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid option.")
+```
+
+EXAMPLE 5: TODO LIST IN MEMORY
+
+```python
+def add_task(tasks, task):
+    tasks.append(task)
+
+
+def show_tasks(tasks):
+    for number, task in enumerate(tasks, start=1):
+        print(number, task)
+```
+
+COMMON GAME-GENERATION MISTAKES:
+- Forgetting to import random.
+- Mixing uppercase and lowercase choices.
+- Deciding a winner from one player's choice only.
+- Calling a function before defining it.
+- Writing a class when a small function is enough.

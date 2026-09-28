@@ -1,0 +1,67 @@
+TITLE: PYTHON OBJECT-ORIENTED PROGRAMMING (OOP)
+
+PURPOSE:
+To introduce classes, objects, and how to group data and functions together into single entities.
+
+WHAT IS IT?
+Object-Oriented Programming (OOP) is a way to structure code. Instead of having loose variables and separate functions, you combine them into a blueprint called a "Class." When you build something from that blueprint, it is called an "Object."
+
+WHY IS IT USEFUL?
+As programs get very large, keeping track of which function belongs to which data gets confusing. OOP helps model real-world concepts neatly.
+
+CORE CONCEPTS:
+
+class: The blueprint (e.g., Car).
+
+object: The actual thing built from the blueprint (e.g., my_honda).
+
+attributes: Variables that belong to an object (e.g., color, speed).
+
+methods: Functions that belong to an object (e.g., drive(), stop()).
+
+init: A special method that runs automatically when you create a new object. It sets up the initial attributes.
+
+self: A special variable inside methods that refers to the specific object you are working with.
+
+inheritance: Creating a new class that copies the behaviors of an older class.
+
+SIMPLE EXPLANATION:
+Think of a Class as a cookie cutter. The Object is the actual cookie.
+__init__ is the recipe for the dough.
+Attributes describe the cookie (chocolate chip, round).
+Methods are things the cookie can do (crumble, be eaten).
+self is the cookie's way of saying "my own chocolate chips."
+
+CODE EXAMPLES:
+
+Defining and using a Class:
+class Dog:
+# init sets up the attributes when the object is created
+def init(self, name, age):
+self.name = name  # These are attributes
+self.age = age
+
+# This is a method
+def bark(self):
+    print(self.name + " says Woof!")
+Creating two separate objects
+dog1 = Dog("Buddy", 3)
+dog2 = Dog("Lucy", 5)
+
+dog1.bark()  # Outputs: Buddy says Woof!
+print(dog2.age) # Outputs: 5
+
+COMMON MISTAKES:
+
+Forgetting self: You must put self as the first parameter in every method inside a class.
+
+Overusing OOP: You do not need a class for everything! If a script is small, simple functions are much better.
+
+WHEN TO USE:
+Use OOP when you have many entities that need to keep track of their own data and states (e.g., users in a database, enemies in a video game).
+
+WHEN NOT TO USE:
+Do not use OOP for a simple script that just reads a file, does some math, and prints a result. Just use functions.
+
+PROJECT CONNECTION:
+In the AI Creator Engine, AI models, Database connections, and Documents in the RAG system are often represented as objects, because they have their own specific data (attributes) and actions (methods).

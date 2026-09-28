@@ -1,0 +1,63 @@
+TITLE: LANGCHAIN, PROMPTS, AND CHAINS
+
+PURPOSE:
+To explain how to manage complex AI workflows using the LangChain framework (and when to avoid it).
+
+WHAT IS IT?
+LangChain is a popular Python framework designed to make building LLM applications easier. It provides standard ways to format prompts, string multiple AI tasks together (chains), and connect to different AI providers easily.
+
+WHY IS IT USEFUL?
+If you want to switch from OpenAI to a local Llama model, their APIs are completely different. LangChain provides a universal wrapper. You write your code once, and you can swap out the AI models behind the scenes effortlessly.
+
+CORE CONCEPTS:
+
+prompt templates: Strings with placeholders (like Python f-strings) used to construct AI prompts dynamically.
+
+reusable prompts: Saving a template so you can pass different data into it repeatedly.
+
+chains: Linking tasks together. Task 1 output becomes Task 2 input.
+
+input/output flow: Ensuring the dictionary leaving one step matches what the next step expects.
+
+why frameworks can help: They standardize connecting to memory, RAG, and different AI APIs.
+
+when simple Python is better: Frameworks add abstraction. Sometimes, standard Python requests and json are cleaner and faster.
+
+basic LangChain concepts only: Chains, PromptTemplates, and LLM wrappers.
+
+SIMPLE EXPLANATION:
+A Prompt Template is a mad-lib.
+Template: "Translate the word {word} into {language}."
+If you pass in word="Apple" and language="French", LangChain builds the final prompt and sends it to the AI.
+A Chain is an assembly line.
+Step 1: AI translates the word.
+Step 2 (Chained): AI writes a poem using the translated word.
+
+CODE EXAMPLES:
+
+Basic Prompt Template:
+from langchain_core.prompts import PromptTemplate
+
+template = PromptTemplate(
+input_variables=["topic"],
+template="Write a one sentence summary of {topic}."
+)
+
+Fills in the blank
+formatted_prompt = template.format(topic="Artificial Intelligence")
+print(formatted_prompt)
+
+COMMON MISTAKES:
+
+Over-engineering with LangChain: LangChain has many advanced, complex features. For a beginner, chaining 15 components together often results in spaghetti code. Only use the parts you actually need.
+
+Hiding errors: Because LangChain wraps so much in the background, if an API key fails, the error message can be deeply hidden in a traceback.
+
+WHEN TO USE:
+Use LangChain when you need to switch between different model providers easily, or when you are building standard RAG pipelines.
+
+WHEN NOT TO USE:
+If you just need to make a single API call to Gemini to get a string of text, writing standard Python using the official google-genai library is often simpler and has fewer dependencies.
+
+PROJECT CONNECTION:
+The AI Creator Engine uses LangChain's basic interfaces to standardize how it talks to online models (OpenAI/Gemini) and local models, making it easy for the student to swap engines.

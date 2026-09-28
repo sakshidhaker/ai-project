@@ -1,0 +1,35 @@
+TITLE: GENERATIVE AI AND LOCAL LLM BASICS
+
+PURPOSE:
+Explain the basic idea of generative AI and how this Teaching Edition uses a small local Qwen model.
+
+WHAT IS AN LLM?
+A Large Language Model (LLM) predicts and generates text from the instructions and context it receives.
+A small model is more limited than a large model, so clear prompts and useful reference material help it produce better results.
+
+RAG CONNECTION:
+Retrieval-Augmented Generation (RAG) gives the model relevant information from the project's knowledge files before generation.
+The retrieved text is reference information. It is not automatically an instruction for the model to copy.
+
+CHAT VS CREATOR:
+Chat answers a user's question using the model plus relevant RAG context.
+Creator asks the model for document content, validates that content, and then sends it to the PDF or DOCX generator.
+
+CODING REQUESTS:
+The current Teaching Edition is intentionally optimized for Python program generation.
+For Python requests, the system supplies focused Python reference examples and checks the generated Python syntax before creating the file.
+
+PROMPT QUALITY:
+A specific request usually gives a small local model clearer direction.
+For example:
+"Create a Python Rock Paper Scissors game. Use random, ask for the user's choice, compare both choices, and print win/lose/tie."
+
+COMMON MISTAKES:
+- Do not trust generated code blindly.
+- Do not confuse reference knowledge with user instructions.
+- Do not use a third-party library for a beginner task when the Python standard library is enough.
+- Code should include every import that it actually uses.
+
+PROJECT CONNECTION:
+This project uses one local Qwen GGUF model through llama-cpp-python and uses Sentence Transformers for semantic RAG retrieval.
+There are no cloud model providers, model routers, or hardware-based model choices in this Teaching Edition.

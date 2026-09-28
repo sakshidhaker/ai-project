@@ -1,0 +1,79 @@
+TITLE: SCIKIT-LEARN AND MACHINE LEARNING
+
+PURPOSE:
+To explain the basics of classical machine learning using Scikit-learn (sklearn).
+
+WHAT IS IT?
+Scikit-learn is a Python library that provides simple tools for predictive data analysis. It includes algorithms for classification, regression, clustering, and data preprocessing.
+
+WHY IS IT USEFUL?
+Before Large Language Models (LLMs) existed, developers used classical ML for tasks like spam detection, predicting house prices, or routing tasks. Scikit-learn provides a standardized, easy-to-use interface to do this reliably.
+
+CORE CONCEPTS:
+
+features (X): The input data you use to make a prediction.
+
+labels (y): The answer you are trying to predict.
+
+train/test split: Dividing data into a "learning" set and a "grading" set.
+
+fit: Teaching the model by showing it features and labels.
+
+predict: Asking the trained model to guess the label for new data.
+
+preprocessing: Converting text or categories into numbers.
+
+Logistic Regression: A standard algorithm used for classification (predicting categories).
+
+classification: Predicting a distinct category (e.g., Spam vs Not Spam).
+
+metrics: Scoring how accurate the model is.
+
+pipelines: Chaining preprocessing and modeling into one step.
+
+TF-IDF connection: A way to turn text into numbers based on word frequency.
+
+avoiding test-set leakage: Ensuring the model never sees the test data during training.
+
+SIMPLE EXPLANATION:
+Machine learning is like teaching a child with flashcards. The front of the card is the feature (X), and the back is the label (y). You show them 80% of the cards and let them study (fit). Then, you test them (predict) on the remaining 20% to see their accuracy score (metrics).
+
+CODE EXAMPLES:
+
+Basic Classification Flow:
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+
+X is features (e.g., height, weight), y is labels (e.g., "Cat", "Dog")
+X = [[10, 5], [12, 6], [80, 40], [90, 45]]
+y = ["Cat", "Cat", "Dog", "Dog"]
+
+Split data: 75% for training, 25% for testing
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+
+Create the model and teach it (fit)
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+Ask it to predict on the test data
+predictions = model.predict(X_test)
+print("Accuracy:", accuracy_score(y_test, predictions))
+
+COMMON MISTAKES:
+
+Test-set leakage: Scaling or preprocessing the whole dataset before splitting it. The model accidentally learns hints about the test data! Always split first, then preprocess.
+
+Skipping text conversion: ML models only understand numbers. If you feed text directly to Logistic Regression, it crashes. You must use something like TF-IDF to convert words to numbers first.
+
+WHEN TO USE:
+Use Scikit-learn for structured tabular data, simple text classification, predicting numbers, and grouping data.
+
+WHEN NOT TO USE:
+Do not use Scikit-learn for deep learning, generating images, or conversing like ChatGPT. Those require neural networks and GenAI.
+
+PROJECT CONNECTION:
+In the AI Creator Engine, classical ML (TF-IDF + Logistic Regression) is used behind the scenes for Task Routing—figuring out if a user prompt is asking for a "summary," a "joke," or "code generation" based on the vocabulary used.
+
+OFFICIAL RESOURCES:
+Scikit-learn Documentation: https://scikit-learn.org/stable/

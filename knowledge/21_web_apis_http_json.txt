@@ -1,0 +1,78 @@
+TITLE: WEB APIS, HTTP, AND JSON
+
+PURPOSE:
+To explain how different computers and applications talk to each other across the internet.
+
+WHAT IS IT?
+HTTP (Hypertext Transfer Protocol) is the rulebook for sending messages over the web. JSON is the universal language they speak. An API (Application Programming Interface) is the specific set of doors a backend provides for a frontend to use.
+
+WHY IS IT USEFUL?
+Your JavaScript frontend runs on the user's browser in their house. Your Python Flask backend runs on a server. They must communicate securely and reliably. HTTP/JSON APIs are how they pass data back and forth.
+
+CORE CONCEPTS:
+
+HTTP: The network protocol.
+
+GET: Retrieve data (e.g., load a profile).
+
+POST: Send new data (e.g., submit a chat message).
+
+PUT / PATCH: Update existing data.
+
+DELETE: Remove data.
+
+status codes: The server's answer (200 OK, 404 Not Found, 500 Server Error).
+
+headers: Hidden metadata sent with a request (like authorization tokens).
+
+JSON: Text formatted logically so both JS and Python can easily read it.
+
+fetch: The JS tool to make HTTP requests.
+
+REST: A design standard for making clean, logical API URLs.
+
+frontend/backend flow: The cycle of Request (JS) -> Process (Python) -> Response (JSON).
+
+authentication vs authorization: Authentication proves who you are. Authorization proves what you are allowed to do.
+
+SIMPLE EXPLANATION:
+Ordering food at a restaurant is an API.
+The Menu is the API documentation.
+You (the Frontend) place an order (HTTP POST request) in a specific format (JSON).
+The Waiter carries it to the Kitchen (the Backend).
+The Kitchen processes the order and the Waiter brings back a Response (Status Code 200: Food is ready, or Status Code 404: Out of soup).
+
+EXAMPLES:
+
+JSON Format:
+{
+"user": "Alice",
+"message": "What is Python?",
+"history_length": 5
+}
+
+Frontend to Backend Flow Example:
+
+JS runs: fetch('/api/chat', {method: 'POST', body: JSON.stringify(...)})
+
+HTTP packet travels across the internet.
+
+Python Flask receives it at @app.route('/api/chat').
+
+Python runs AI model and gets a result.
+
+Python returns jsonify({'reply': 'Python is a language...'}).
+
+JS receives the JSON and updates the HTML screen.
+
+COMMON MISTAKES:
+
+Sending JS Objects directly: You cannot send a raw JavaScript object over HTTP. You must convert it to a string first using JSON.stringify().
+
+Ignoring status codes: Frontend code should always check if (response.ok) before trying to read the data, in case the server sent a 500 Error.
+
+WHEN TO USE:
+Use APIs to separate your frontend from your backend, allowing multiple frontends (a website, a mobile app) to talk to the exact same Python server.
+
+PROJECT CONNECTION:
+The AI Creator Engine has a clean separation. The browser handles the UI and sends HTTP POST requests containing JSON to the Flask API. Flask talks to LLMs and sends JSON back.

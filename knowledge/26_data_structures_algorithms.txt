@@ -1,0 +1,62 @@
+TITLE: DATA STRUCTURES AND ALGORITHMS
+
+PURPOSE:
+To explain how data is organized (structures) and the step-by-step instructions used to process it (algorithms).
+
+WHAT IS IT?
+Data structures are containers holding information. Algorithms are the recipes used to search, sort, or modify that information. Together, they dictate how fast and efficient a computer program runs.
+
+WHY IS IT USEFUL?
+If you store a million users in a simple list, searching for one user might take seconds. If you store them in a Hash Table, the search takes a fraction of a millisecond. Choosing the right structure is the difference between an app that feels instant and an app that freezes.
+
+CORE CONCEPTS:
+
+arrays / lists: Items stored in a continuous line.
+
+linked lists: Items stored anywhere, but each item holds a pointer to the next one.
+
+stack: Last In, First Out (LIFO). Like a stack of plates.
+
+queue: First In, First Out (FIFO). Like waiting in line.
+
+set: A collection of unique items (no duplicates).
+
+hash table (Dictionary in Python): Lookups using key-value pairs.
+
+tree: Hierarchical data with a root and branches (like a family tree or computer folders).
+
+heap: A special tree used for quickly finding the maximum or minimum value.
+
+graph: Nodes connected by edges (like a social network or GPS map).
+
+linear search: Checking every item one by one.
+
+binary search: Searching a sorted list by cutting it in half repeatedly.
+
+sorting: Arranging data in order.
+
+BFS / DFS: Algorithms for searching Trees and Graphs (Breadth-First vs Depth-First).
+
+Big-O basics: A notation to describe how an algorithm slows down as data gets bigger (e.g., O(1) is instant, O(N) takes longer as data grows).
+
+SIMPLE EXPLANATION:
+
+Stack: The "Undo" button on your computer. It remembers the last thing you did and reverses it first.
+
+Queue: A printer queue. The first document sent is the first one printed.
+
+Hash Table: A dictionary book. You don't read every page; you jump straight to the word.
+
+Binary Search: Guessing a number between 1-100. If you guess 50 and I say "higher", you immediately eliminate 1-50. You cut the problem in half every step.
+
+COMMON MISTAKES:
+
+Using a List when you should use a Dictionary/Hash Table: Checking if item in list for a million items is very slow O(N). Checking if key in dict is instant O(1).
+
+Overcomplicating simple tasks: You rarely need to write your own sorting algorithm; Python's built-in .sort() is highly optimized.
+
+WHEN TO USE:
+Use these concepts to design how your application stores data in memory before saving it to a database.
+
+WHEN NOT TO USE:
+Do not try to build complex structures like Trees or Graphs from scratch in everyday scripting unless the problem specifically demands it.

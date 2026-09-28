@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login - AI Creator Engine</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="auth-page">
+  <!--
+    SECTION: LOGIN PAGE
+    PURPOSE: Collect the email/password needed for authentication.
+    CONNECTION: POST /api/auth/login -> backend/api/auth_api.py -> backend/auth.py -> SQLite.
+    EDIT HERE: Change visible labels/help text. Keep the field names used by the Python route.
+  -->
+  <main class="auth-card">
+    <p class="eyebrow">AI CREATOR ENGINE</p>
+    <h1>Welcome back.</h1>
+    <p class="subtitle">Sign in to use your local-first AI workspace.</p>
+
+    <!-- SECTION: LOGIN FORM
+         The browser sends these fields directly to Flask; JavaScript is unnecessary here. -->
+    <form class="auth-form" action="/api/auth/login" method="POST">
+      <label for="login-email">Email
+        <input id="login-email" type="email" name="email" autocomplete="email" required>
+      </label>
+      <label for="login-password">Password
+        <input id="login-password" type="password" name="password" autocomplete="current-password" required>
+      </label>
+      <button type="submit">Login</button>
+    </form>
+
+    <!-- CONNECTION: Flask redirects back with ?error=... and Jinja prints it here. -->
+    {% if error %}<p class="auth-message">{{ error }}</p>{% endif %}
+
+    <p class="auth-link">New here? <a href="/signup">Create an account</a></p>
+  </main>
+</body>
+</html>

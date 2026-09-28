@@ -1,0 +1,66 @@
+TITLE: FASTAPI BASICS
+
+PURPOSE:
+To introduce FastAPI, a modern, fast web framework for building APIs in Python.
+
+WHAT IS IT?
+FastAPI is a newer alternative to Flask. It is designed from the ground up to be extremely fast and to automatically validate data using Python's modern type hinting system.
+
+WHY IS IT USEFUL?
+When building an API, you spend a lot of time checking if the data the user sent is correct (e.g., "Did they send an integer for age?"). FastAPI does all this checking automatically and generates an interactive instruction manual (API docs) for you instantly.
+
+CORE CONCEPTS:
+
+FastAPI basics: Creating an app object.
+
+routes: Connecting URLs to functions.
+
+HTTP methods: GET, POST, PUT, DELETE.
+
+request bodies: Data sent by the user, managed via Pydantic models.
+
+path/query parameters: Data passed in the URL (e.g., /users/5).
+
+type hints: Declaring variable types (e.g., name: str).
+
+validation: Rejecting bad data automatically.
+
+automatic API docs: Creating a Swagger UI page at /docs.
+
+comparison with Flask: Flask is older and simpler; FastAPI requires understanding typing but writes safer, faster code.
+
+SIMPLE EXPLANATION:
+If Flask is a friendly receptionist, FastAPI is a strict, high-tech security gate. You tell the gate exactly what a user's ID badge should look like using Type Hints. If the user sends a text string when you asked for an integer, FastAPI automatically rejects them with a helpful error message—you don't have to write the error-checking code yourself!
+
+CODE EXAMPLES:
+
+Basic FastAPI App:
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+Define the expected JSON body structure
+class Item(BaseModel):
+name: str
+price: float
+
+@app.post("/items/")
+def create_item(item: Item):
+# FastAPI guarantees that 'item' has a string name and float price here.
+return {"message": f"Successfully created {item.name} for ${item.price}"}
+
+COMMON MISTAKES:
+
+Ignoring async/await: FastAPI shines when you use asynchronous programming. If you run slow, synchronous tasks in FastAPI without care, you block the server.
+
+Forgetting to run with Uvicorn: You can't just run python app.py easily like in Flask. You usually use the command line: uvicorn app:app --reload.
+
+WHEN TO USE:
+Use FastAPI when building new, modern APIs where performance and strict data validation are critical.
+
+WHEN NOT TO USE:
+If you are building a traditional web app that serves HTML templates, Flask or Django is often easier. FastAPI is heavily focused on JSON APIs.
+
+OFFICIAL RESOURCES:
+FastAPI Documentation: https://fastapi.tiangolo.com/

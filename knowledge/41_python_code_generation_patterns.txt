@@ -1,0 +1,121 @@
+TITLE: PYTHON CODE GENERATION PATTERNS
+
+PURPOSE:
+Provide complete, correct Python patterns that a small local model can reuse when a user asks for a function or small program.
+
+TEACHING RULE:
+This file is example material, not a list of answers to hardcoded questions. The model should adapt the patterns to the user's request.
+
+PATTERN 1: SIMPLE FUNCTION
+
+```python
+def add_numbers(first, second):
+    """Return the sum of two numbers."""
+    return first + second
+
+result = add_numbers(5, 3)
+print(result)
+```
+
+PATTERN 2: VALIDATE INPUT
+
+```python
+def is_valid_choice(choice):
+    """Return True when choice is one of the allowed values."""
+    allowed = ["rock", "paper", "scissors"]
+    return choice.lower() in allowed
+```
+
+PATTERN 3: IF/ELIF/ELSE DECISION
+
+```python
+def classify_number(number):
+    if number > 0:
+        return "positive"
+    elif number < 0:
+        return "negative"
+    return "zero"
+```
+
+PATTERN 4: LOOP THROUGH A LIST
+
+```python
+def print_items(items):
+    for item in items:
+        print(item)
+```
+
+PATTERN 5: COUNT WORDS WITH A DICTIONARY
+
+```python
+def count_words(sentence):
+    counts = {}
+    words = sentence.lower().split()
+
+    for word in words:
+        if word not in counts:
+            counts[word] = 0
+        counts[word] += 1
+
+    return counts
+```
+
+PATTERN 6: RANDOM CHOICE
+
+```python
+import random
+
+
+def choose_item(items):
+    return random.choice(items)
+```
+
+PATTERN 7: SAFE NUMBER INPUT
+
+```python
+def get_number():
+    while True:
+        try:
+            return float(input("Enter a number: "))
+        except ValueError:
+            print("Please enter a valid number.")
+```
+
+PATTERN 8: READ A TEXT FILE
+
+```python
+def read_text_file(filename):
+    with open(filename, "r", encoding="utf-8") as file:
+        return file.read()
+```
+
+PATTERN 9: WRITE JSON
+
+```python
+import json
+
+
+def save_settings(settings, filename):
+    with open(filename, "w", encoding="utf-8") as file:
+        json.dump(settings, file, indent=4)
+```
+
+PATTERN 10: BASIC CLASS
+
+```python
+class Student:
+    def __init__(self, name):
+        self.name = name
+
+    def introduce(self):
+        return "My name is " + self.name
+```
+
+GENERATION CHECKLIST:
+1. Include imports used by the code.
+2. Define functions before calling them.
+3. Use consistent variable names.
+4. Keep indentation correct.
+5. Keep the requested language as Python.
+6. Prefer the standard library for small examples.
+7. Give a complete runnable example when the user asks for a program.

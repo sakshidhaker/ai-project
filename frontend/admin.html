@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin - AI Creator Engine</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="app-body">
+  <!--
+    FILE: frontend/admin.html
+    PURPOSE: Show the only administration task: view/search/delete users.
+    CONNECTION: Jinja page -> Flask /admin -> backend/admin.py -> database.py -> SQLite.
+    IMPORTANT: Search/delete are server-side; app.js is not required for this page.
+  -->
+  <div class="app-layout">
+    <!-- SECTION: ADMIN SIDEBAR
+         Purpose: navigation and a visible map of the Python/database connection. -->
+    <aside class="sidebar">
+      <p class="eyebrow">AI CREATOR ENGINE</p>
+      <h2>Admin</h2>
+      <p class="sidebar-note">Simple management of the one users table.</p>
+      <nav class="side-nav">
+        <a class="nav-link" href="/app">Chat &amp; Create</a>
+        <a class="nav-link active" href="/admin">Admin</a>
+      </nav>
+      <form action="/api/auth/logout" method="POST"><button class="secondary full" type="submit">Log out</button></form>
+      <section class="sidebar-section">
+        <h3>Connection</h3>
+        <p class="tiny-text">Jinja → Flask → admin.py → database.py → SQLite</p>
+      </section>
+    </aside>
+
+    <main class="workspace">
+      <!-- SECTION: ADMIN HEADER -->
+      <header class="topbar"><strong>User Administration</strong><span class="user-badge">{{ user.email }}</span></header>
+
+      <section class="content-width page-section">
+        <div class="page-heading">
+          <div>
+            <p class="eyebrow">USERS</p>
+            <h1>Manage registered users.</h1>
+            <p class="subtitle">Python does the search and deletion; Jinja displays the result.</p>
+          </div>
+        </div>
+
+        {% if message %}<div class="status">{{ message }}</div>{% endif %}
+
+        <div class="card">
+          <!-- SECTION: ADMIN SEARCH
+               Connection: GET /admin?q=... -> main.py -> admin.list_users() -> database.py. -->
+          <form class="admin-search-form" action="/admin" method="GET">
+            <label for="admin-search">Search by name or email</label>
+            <div class="form-row">
+              <input id="admin-search" type="search" name="q" value="{{ search }}" placeholder="student@example.com">
+              <button type="submit">Search</button>
+            </div>
+          </form>
+
+          <!-- SECTION: USER TABLE
+               Jinja loops over Python's SQLite result; no client-side data processing is needed. -->
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Date Created</th><th>Action</th></tr></thead>
+              <tbody>
+                {% for row in users %}
+                <tr>
+                  <td>{{ row.id }}</td>
+                  <td>{{ row.name }}</td>
+                  <td>{{ row.email }}</td>
+                  <td>{{ row.created_at }}</td>
+                  <td>
+                    {% if row.email != user.email %}
+                    <form action="/admin" method="POST" onsubmit="return confirm('Delete this user permanently?');">
+                      <input type="hidden" name="user_id" value="{{ row.id }}">
+                      <button class="danger-button" type="submit">Delete</button>
+                    </form>
+                    {% else %}
+                    <span class="small-text">Current admin</span>
+                    {% endif %}
+                  </td>
+                </tr>
+                {% else %}
+                <tr><td colspan="5">No users found.</td></tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

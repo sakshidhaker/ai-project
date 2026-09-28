@@ -1,0 +1,32 @@
+TITLE: PYTHON ERRORS AND DEBUGGING
+
+PURPOSE:
+Teach the model and students to recognize common Python errors and fix root causes instead of hiding them.
+
+COMMON ERRORS:
+SyntaxError: The Python grammar is invalid.
+NameError: A variable or function name is not defined.
+TypeError: An operation uses incompatible data types.
+ValueError: The type is appropriate but the value is not accepted.
+KeyError: A dictionary key does not exist.
+IndexError: A list index is outside the available range.
+FileNotFoundError: The requested file does not exist.
+
+EXAMPLE: HANDLE USER NUMBER INPUT
+
+```python
+try:
+    amount = float(input("Enter a number: "))
+    print(amount * 2)
+except ValueError:
+    print("That is not a number!")
+```
+
+DEBUGGING RULE:
+Read the traceback. The last line normally names the error; the lines above show where it happened.
+
+GENERATION RULES:
+- Do not use a bare except when a specific error can be named.
+- Do not hide a bug with a large try/except block.
+- Check the data flow from the input to the failing line.
+- When generating code, check imports, names, types, and indentation before presenting the result.
